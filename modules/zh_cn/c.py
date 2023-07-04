@@ -25,7 +25,7 @@ channel.description("ccc")
 channel.author("ltzXiaoYanMo")
 
 sl1 = ["c", "草", "草的", "屮", "艹", "太草了", "tcl", ]  # 模糊匹配
-sl2 = [""]  # 精确匹配
+sl2 = ["cao"]  # 精确匹配
 jieba.load_userdict('./jieba_words.txt')
 
 
@@ -113,13 +113,9 @@ async def f_hide_mid(string, count=4, fix='*'):
 
 
 async def text_pretreatment(s):
-    s = s.replace('草', 'c').replace('九', '9').replace('陆', '6').replace('玖', '9') \
-        .replace('(', '（').replace(')', '）')
+    s = s.replace('草', 'c')
     replace_words = [
-        (r"6+", "6"),
-        (r"9+", "9"),
-        (r"（+", "（"),
-        (r"）+", "）")
+        (r"c+", "c"),
     ]
     stop_words = " ，,。.!！？?…^"
     for stop in stop_words:
