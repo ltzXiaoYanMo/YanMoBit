@@ -217,7 +217,7 @@ async def six_top(app: Ariadne, group: Group, event: GroupMessage):
 
 
 @listen(GroupMessage)
-@decorate(MatchContent("6，闭嘴"))
+@decorate(MatchContent("6，闭个嘴"))
 async def no_six(app: Ariadne, group: Group, event: GroupMessage):
     admins = await botfunc.get_all_admin()
     if event.sender.id not in admins:
@@ -230,7 +230,7 @@ async def no_six(app: Ariadne, group: Group, event: GroupMessage):
             MessageChain(
                 [
                     At(event.sender.id),
-                    Plain(" 好啊，很好啊")
+                    Plain(" 彳亍")
                 ]
             ),
             quote=event.source
@@ -238,7 +238,7 @@ async def no_six(app: Ariadne, group: Group, event: GroupMessage):
 
 
 @listen(GroupMessage)
-@decorate(MatchContent("6，张嘴"))
+@decorate(MatchContent("6，张个嘴"))
 async def yes_six(app: Ariadne, group: Group, event: GroupMessage):
     admins = await botfunc.get_all_admin()
     if event.sender.id not in admins:
@@ -251,7 +251,7 @@ async def yes_six(app: Ariadne, group: Group, event: GroupMessage):
             MessageChain(
                 [
                     At(event.sender.id),
-                    Plain(" 好啊，很好啊")
+                    Plain(" 彳亍")
                 ]
             ),
             quote=event.source
