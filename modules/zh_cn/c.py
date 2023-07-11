@@ -182,11 +182,12 @@ async def six_six_six(app: Ariadne, group: Group, event: GroupMessage, message: 
         # 判断
         if cos >= 0.75:  # 判断为 c
             if data is not None:
-                await botfunc.run_sql("""UPDATE six SET count = count+1, ti = unix_timestamp() WHERE uid = %s""",
+                await botfunc.run_sql("""UPDATE c SET count = count+1, ti = unix_timestamp() WHERE uid = %s""",
                                       (event.sender.id,))
             else:
                 await botfunc.run_sql("""INSERT INTO six VALUES (%s, 1, unix_timestamp())""", (event.sender.id,))
-            if group.id not in cache_var.no_6 and (data is None or time.time() - data[2] >= 600):
+            if group.id not in cache_var.no_c
+            and (data is None or time.time() - data[2] >= 600):
                 img = os.listdir(os.path.abspath(os.curdir) + '/img/6/')
                 await app.send_group_message(target=group,
                                              message=MessageChain(
@@ -200,7 +201,7 @@ async def six_six_six(app: Ariadne, group: Group, event: GroupMessage, message: 
 @listen(GroupMessage)
 @decorate(MatchContent("c榜"))
 async def six_top(app: Ariadne, group: Group, event: GroupMessage):
-    data = await botfunc.select_fetchall("SELECT uid, count FROM six ORDER BY count DESC LIMIT 21")
+    data = await botfunc.select_fetchall("SELECT uid, count FROM c ORDER BY count DESC LIMIT 21")
     try:
         msg = await selectivity_hide(data)
     except ValueError:
@@ -213,13 +214,13 @@ async def six_top(app: Ariadne, group: Group, event: GroupMessage):
 
 @listen(GroupMessage)
 @decorate(MatchContent("c，闭嘴"))
-async def no_six(app: Ariadne, group: Group, event: GroupMessage):
+async def no_c(app: Ariadne, group: Group, event: GroupMessage):
     admins = await botfunc.get_all_admin()
     if event.sender.id not in admins:
         return
-    if group.id not in cache_var.no_6:
+    if group.id not in cache_var.no_c:
         cache_var.no_6.append(group.id)
-        await botfunc.run_sql("""INSERT INTO no_six VALUES (%s)""", (group.id,))
+        await botfunc.run_sql("""INSERT INTO no_c VALUES (%s)""", (group.id,))
         await app.send_group_message(
             group,
             MessageChain(
@@ -234,13 +235,13 @@ async def no_six(app: Ariadne, group: Group, event: GroupMessage):
 
 @listen(GroupMessage)
 @decorate(MatchContent("c，张嘴"))
-async def yes_six(app: Ariadne, group: Group, event: GroupMessage):
+async def yes_c(app: Ariadne, group: Group, event: GroupMessage):
     admins = await botfunc.get_all_admin()
     if event.sender.id not in admins:
         return
     if group.id in cache_var.no_6:
         cache_var.no_6.remove(group.id)
-        await botfunc.run_sql("""DELETE FROM no_six WHERE gid = %s""", (group.id,))
+        await botfunc.run_sql("""DELETE FROM no_c WHERE gid = %s""", (group.id,))
         await app.send_group_message(
             group,
             MessageChain(
