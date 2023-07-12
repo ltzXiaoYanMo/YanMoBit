@@ -98,7 +98,9 @@ cursor.execute("""CREATE TABLE IF NOT EXISTS `no_c` (
 cursor.execute('SELECT wd, count FROM wd')
 cache_var.sensitive_words = [x[0] for x in cursor.fetchall()]
 cursor.execute('SELECT gid FROM no_six')
-cache_var.sensitive_words = [x[0] for x in cursor.fetchall()]
+cache_var.no_6 = [x[0] for x in cursor.fetchall()]
+cursor.execute('SELECT gid FROM no_c')
+cache_var.no_c = [x[0] for x in cursor.fetchall()]
 cursor.execute('SELECT uid FROM admin')
 if not cursor.fetchall():
     admin_uid = int(input("数据中未找到任何一个管理，请输入你自己的QQ号作为管理："))

@@ -24,7 +24,7 @@ channel.name("c榜")
 channel.description("ccc")
 channel.author("ltzXiaoYanMo")
 
-sl1 = ["c", "草", "草的", "屮", "艹", "太草了", "tcl","操","测" ]  # 模糊匹配
+sl1 = ["c", "草", "草的", "屮", "艹", "太草了", "tcl", "操", "测"]  # 模糊匹配
 sl2 = ["cao"]  # 精确匹配
 jieba.load_userdict('./jieba_words.txt')
 
@@ -113,11 +113,11 @@ async def f_hide_mid(string, count=4, fix='*'):
 
 
 async def text_pretreatment(s):
-    s = s.replace('草', 'c')
+    s = s.lower()
     replace_words = [
         (r"c+", "c"),
     ]
-    stop_words = " ，,。.!！？?…^"
+    stop_words = " ，,。.!！？?…^\n"
     for stop in stop_words:
         s = s.replace(stop, '')
     for regex in replace_words:
@@ -186,16 +186,15 @@ async def c_c_c(app: Ariadne, group: Group, event: GroupMessage, message: Messag
                                       (event.sender.id,))
             else:
                 await botfunc.run_sql("""INSERT INTO c VALUES (%s, 1, unix_timestamp())""", (event.sender.id,))
-            if group.id not in cache_var.no_c:
-            and (data is None or time.time() - data[2] >= 600):
-                img = os.listdir(os.path.abspath(os.curdir) + '/img/6/')
+            if group.id not in cache_var.no_c and (data is None or time.time() - data[2] >= 600):
+                img = os.listdir(os.path.abspath(os.curdir) + '/img/c/')
                 await app.send_group_message(target=group,
                                              message=MessageChain(
                                                  [At(event.sender.id),
-                                                  Image(path=os.path.abspath(os.curdir) + '/img/6/' + random.choice(
+                                                  Image(path=os.path.abspath(os.curdir) + '/img/c/' + random.choice(
                                                       img))]),
                                              quote=event.source)
-            break
+        break
 
 
 @listen(GroupMessage)
