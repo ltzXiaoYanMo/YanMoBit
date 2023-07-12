@@ -9,6 +9,6 @@
 
 同时基于Mirai与Graia（（（
 
-此YanBot需要配置cloud.json（运行main.py自动生成）与config.yaml文件即可（色图需在modules中删除，详细请看Older版本）
+此YanBot需要配置cloud.json（运行main.py自动生成）与config.yaml文件即可（色图需在modules中删除，详细请看Older版本）（但如果你要用Older版本确实也能用（草））
 
 最后感谢括弧对Bot的支持！
