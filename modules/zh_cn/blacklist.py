@@ -1,4 +1,4 @@
-#  本项目遵守 AGPL-3.0 协议，项目地址：https://github.com/daizihan233/MiraiHanBot
+#  本项目遵守 AGPL-3.0 协议，项目原地址：https://github.com/daizihan233/MiraiHanBot
 
 import pymysql.err
 from graia.amnesia.message import MessageChain
@@ -15,8 +15,8 @@ import botfunc
 
 channel = Channel.current()
 channel.name("黑名单")
-channel.description("屌你老母")
-channel.author("HanTools")
+channel.description("傻逼东西")
+channel.author("ltzXiaoYanMo")
 
 
 @listen(GroupMessage)
