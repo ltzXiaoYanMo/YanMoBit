@@ -186,7 +186,7 @@ async def six_six_six(app: Ariadne, group: Group, event: GroupMessage, message: 
                                       (event.sender.id,))
             else:
                 await botfunc.run_sql("""INSERT INTO six VALUES (%s, 1, unix_timestamp())""", (event.sender.id,))
-            if group.id not in cache_var.no_c
+            if group.id not in cache_var.no_c:
             and (data is None or time.time() - data[2] >= 600):
                 img = os.listdir(os.path.abspath(os.curdir) + '/img/6/')
                 await app.send_group_message(target=group,
