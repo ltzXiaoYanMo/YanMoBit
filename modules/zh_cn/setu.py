@@ -47,7 +47,7 @@ async def setu(app: Ariadne, group: Group):
 
 
 @listen(GroupMessage)
-@decorate(MatchContent("无内鬼，来点加密压缩包"))
+@decorate(MatchContent("无内鬼，火树来点加密压缩包"))
 async def setu_7z(app: Ariadne, group: Group):
     img_id = time.time()
     await app.send_message(group, f'[{img_id}] 装弹中……')
