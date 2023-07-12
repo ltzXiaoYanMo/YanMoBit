@@ -48,7 +48,7 @@ jieba.load_userdict("./jieba_words.txt")
 
 
 @listen(GroupMessage)
-@decorate(MatchContent("开启本群敏感词检测"))
+@decorate(MatchContent("开启敏感词检测"))
 async def start_word(app: Ariadne, group: Group, event: GroupMessage):
     with open(dyn_config, 'r') as cf:
         cfy = yaml.safe_load(cf)
@@ -60,7 +60,7 @@ async def start_word(app: Ariadne, group: Group, event: GroupMessage):
 
 
 @listen(GroupMessage)
-@decorate(MatchContent("关闭本群敏感词检测"))
+@decorate(MatchContent("关闭敏感词检测"))
 async def stop_word(app: Ariadne, group: Group, event: GroupMessage):
     with open(dyn_config, 'r') as cf:
         cfy = yaml.safe_load(cf)
