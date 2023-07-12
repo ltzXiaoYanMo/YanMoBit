@@ -53,10 +53,10 @@ async def nmsl(app: Ariadne, event: GroupMessage, message: MessageChain = Detect
             await botfunc.run_sql('INSERT INTO blacklist(uid, op) VALUES (%s, %s)',
                                   (int(str(message)), event.sender.id))
         except TypeError:
-            await app.send_message(event.sender.group, "类型错误，无法添加至数据库")
+            await app.send_message(event.sender.group, "啥比，输错辣")
             return
         except pymysql.err.IntegrityError:
-            await app.send_message(event.sender.group, "此人已在数据库")
+            await app.send_message(event.sender.group, "此账号已在数据库当中")
             return
         else:
             try:
@@ -65,7 +65,7 @@ async def nmsl(app: Ariadne, event: GroupMessage, message: MessageChain = Detect
                     event.sender.id
                 )
             except PermissionError:
-                await app.send_message(event.sender.group, "已成功添加进黑名单数据库，但机器人无权踢出此人")
+                await app.send_message(event.sender.group, "已成功添加进黑名单数据库，但Bot非管理，无权踢出此人")
             else:
                 await app.send_message(event.sender.group, "已成功添加进黑名单数据库并踢出了此人")
     else:
@@ -84,7 +84,7 @@ async def kicksb(app: Ariadne, event: MemberJoinEvent):
             await app.send_message(event.member.group,
                                    f"{event.member.id} 在机器人的黑名单列表中，由 {t[1]} 添加，但机器人权限过低，无法踢出")
         else:
-            await app.send_message(event.member.group, f'{event.member.id} 被踢出去辣！（喜）')
+            await app.send_message(event.member.group, f'{event.member.id} 被飞机票辣！好似！开香槟')
 
 
 @listen(GroupMessage)
@@ -95,6 +95,6 @@ async def nmms(app: Ariadne, event: GroupMessage, message: MessageChain = Detect
     try:
         await botfunc.run_sql('DELETE FROM blacklist WHERE uid = %s',
                               (int(str(message)),))
-        await app.send_message(event.sender.group, "好乐！")
+        await app.send_message(event.sender.group, "已经从数据库中删除！")
     except Exception as err:
         await app.send_message(event.sender.group, f"Umm，{err}")
