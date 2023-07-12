@@ -24,7 +24,7 @@ channel.name("c榜")
 channel.description("ccc")
 channel.author("ltzXiaoYanMo")
 
-sl1 = ["c", "草", "草的", "屮", "艹", "太草了", "tcl", ]  # 模糊匹配
+sl1 = ["c", "草", "草的", "屮", "艹", "太草了", "tcl","操","测" ]  # 模糊匹配
 sl2 = ["cao"]  # 精确匹配
 jieba.load_userdict('./jieba_words.txt')
 
@@ -205,7 +205,7 @@ async def six_top(app: Ariadne, group: Group, event: GroupMessage):
     try:
         msg = await selectivity_hide(data)
     except ValueError:
-        await app.send_group_message(group, MessageChain([At(event.sender.id), Plain(" 木有数据~")]),
+        await app.send_group_message(group, MessageChain([At(event.sender.id), Plain("在目前并未有人发哦（")]),
                                      quote=event.source)
     else:
         await app.send_group_message(group, MessageChain([At(event.sender.id), Plain(" \n"), Plain("\n".join(msg))]),
