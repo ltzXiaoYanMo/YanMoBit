@@ -149,18 +149,18 @@ async def selectivity_hide(lst):
 
 @listen(GroupMessage)
 async def six_six_six(app: Ariadne, group: Group, event: GroupMessage, message: MessageChain):
-    data = await botfunc.select_fetchone("""SELECT uid, count, ti FROM six WHERE uid = %s""", event.sender.id)
+    data = await botfunc.select_fetchone("""SELECT uid, count, ti FROM c WHERE uid = %s""", event.sender.id)
     if data is not None and int(time.time()) - data[2] < 10:
-        await botfunc.run_sql("""UPDATE six SET ti = unix_timestamp() WHERE uid = %s""", (event.sender.id,))
+        await botfunc.run_sql("""UPDATE c SET ti = unix_timestamp() WHERE uid = %s""", (event.sender.id,))
         return
     msg = [x.text for x in message.get(Plain)]
     s2_ = await text_pretreatment("".join(msg))
     if s2_ in sl2:
         if data is not None:
-            await botfunc.run_sql("""UPDATE six SET count = count+1, ti = unix_timestamp() WHERE uid = %s""",
+            await botfunc.run_sql("""UPDATE c SET count = count+1, ti = unix_timestamp() WHERE uid = %s""",
                                   (event.sender.id,))
         else:
-            await botfunc.run_sql("""INSERT INTO six VALUES (%s, 1, unix_timestamp())""", (event.sender.id,))
+            await botfunc.run_sql("""INSERT INTO c VALUES (%s, 1, unix_timestamp())""", (event.sender.id,))
         if data is None or time.time() - data[2] >= 600:
             img = os.listdir(os.path.abspath(os.curdir) + '/img/c/')
             await app.send_group_message(target=group,
@@ -185,7 +185,7 @@ async def six_six_six(app: Ariadne, group: Group, event: GroupMessage, message: 
                 await botfunc.run_sql("""UPDATE c SET count = count+1, ti = unix_timestamp() WHERE uid = %s""",
                                       (event.sender.id,))
             else:
-                await botfunc.run_sql("""INSERT INTO six VALUES (%s, 1, unix_timestamp())""", (event.sender.id,))
+                await botfunc.run_sql("""INSERT INTO c VALUES (%s, 1, unix_timestamp())""", (event.sender.id,))
             if group.id not in cache_var.no_c:
             and (data is None or time.time() - data[2] >= 600):
                 img = os.listdir(os.path.abspath(os.curdir) + '/img/6/')
@@ -239,8 +239,8 @@ async def yes_c(app: Ariadne, group: Group, event: GroupMessage):
     admins = await botfunc.get_all_admin()
     if event.sender.id not in admins:
         return
-    if group.id in cache_var.no_6:
-        cache_var.no_6.remove(group.id)
+    if group.id in cache_var.no_c:
+        cache_var.no_c.remove(group.id)
         await botfunc.run_sql("""DELETE FROM no_c WHERE gid = %s""", (group.id,))
         await app.send_group_message(
             group,
