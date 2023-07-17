@@ -25,7 +25,7 @@ channel.description("ccc")
 channel.author("ltzXiaoYanMo")
 
 sl1 = ["c", "草", "草的", "屮", "艹", "tcl", "操", "测",]  # 模糊匹配
-sl2 = ["cao","操你妈","吊你妈","cvm","wcnm","太草了"]  # 精确匹配
+sl2 = ["cao","太草了"]  # 精确匹配
 jieba.load_userdict('./jieba_words.txt')
 
 
