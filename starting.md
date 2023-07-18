@@ -1,5 +1,7 @@
+# 此篇文章年代较久远，可追溯到YanBot-Older时期，具体文章和现代YanBot有出入，此篇文章如有问题可提Issue
 1.安装依赖
-首先，YanBot的所有版本都以Python编写，且KHB的Python版本>=3.10，<del>OpenMariya的Python>=3.11且双方获取模块方式不一样，这里是KHB的方式。</del>OM的版本也没了（
+
+首先，YanBot的所有版本都以Python编写，且KHB的Python版本>=3.10，<del>OpenMariya的Python>=3.11且双方获取模块方式不一样，这里是KHB的方式</del>。OM的版本也没了（
 
 安装pdm，输入以下字符安装pdm
 
@@ -38,9 +40,9 @@
 
 3.配置YanBot
     
-YanBot与KuoHuBit的配置其实都很简单，都是更改cloud.json和config.yaml。<del>不然怎么会说基于KuoHuBit呢。</del>
+YanBot与KuoHuBit的配置其实都很简单，都是更改cloud.json和config.yaml。最新版本当中需运行main.py才可出现cloud.json文件。<del>不然怎么会说基于KuoHuBit呢。</del>
 
-这边注意下，cloud.json仅支持MySQL，<del>用户也仅支持root</del>在新版中已经支持其他用户；config.yaml的色图功能需在/modules/zh-cn/setu.py和/modules/zh-cht/setu.py这俩Python可执行文件删除即可关闭，且cloud.json的所有注释都必须删除。
+这边注意下，cloud.json仅支持MySQL，<del>用户也仅支持root</del>，在新版中已经支持其他用户；config.yaml的色图功能需在/modules/zh-cn/setu.py和/modules/zh-cht/setu.py这俩Python可执行文件删除即可关闭。
 
 4.配置结束，启动和使用YanBot
 
