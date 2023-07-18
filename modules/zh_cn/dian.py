@@ -24,7 +24,7 @@ channel.name("典")
 channel.description("你 典 你 吗")
 channel.author("ltzXiaoYanMo")
 
-sl1 = ["典","孝","急","乐","樂","绷","蚌"]  # 模糊匹配
+sl1 = ["典", "孝", "急", "乐", "樂", "绷", "蚌"]  # 模糊匹配
 sl2 = ["赢"]  # 精确匹配
 jieba.load_userdict('./jieba_words.txt')
 
