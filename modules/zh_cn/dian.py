@@ -22,7 +22,7 @@ import cache_var
 channel = Channel.current()
 channel.name("典")
 channel.description("你 典 你 吗")
-channel.author("ltzXiaoYanMo")
+channel.author("ltzXiaoYanMo","Emerald-AM9","Hantools")
 
 sl1 = ["典", "孝", "急", "乐", "樂", "绷", "蚌"]  # 模糊匹配
 sl2 = ["赢"]  # 精确匹配
