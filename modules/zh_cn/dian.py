@@ -114,14 +114,12 @@ async def f_hide_mid(string, count=4, fix='*'):
 
 async def text_pretreatment(s):
     s = s.lower()
-    replace_words = [
-        (r"c+", "c"),
-    ]
-    stop_words = " ，,。.!！？?…^\n"
+    stop_words = " ，,。.!！？?…^()（）\n"
     for stop in stop_words:
         s = s.replace(stop, '')
-    for regex in replace_words:
-        s = re.compile(regex[0]).sub(regex[1], s)
+    replace_words = []
+    for regex in sl1 + sl2 + replace_words:
+        s = re.compile(f"({regex})+").sub(regex, s)
     return s
 
 
@@ -182,11 +180,11 @@ async def dian_le_beng(app: Ariadne, group: Group, event: GroupMessage, message:
         # 判断
         if cos >= 0.75:  # 判断为 "发典了"
             if data is not None:
-                await botfunc.run_sql("""UPDATE c SET count = count+1, ti = unix_timestamp() WHERE uid = %s""",
+                await botfunc.run_sql("""UPDATE dian SET count = count+1, ti = unix_timestamp() WHERE uid = %s""",
                                       (event.sender.id,))
             else:
-                await botfunc.run_sql("""INSERT INTO c VALUES (%s, 1, unix_timestamp())""", (event.sender.id,))
-            if group.id not in cache_var.no_c and (data is None or time.time() - data[2] >= 600):
+                await botfunc.run_sql("""INSERT INTO dian VALUES (%s, 1, unix_timestamp())""", (event.sender.id,))
+            if group.id not in cache_var.no_dian and (data is None or time.time() - data[2] >= 600):
                 img = os.listdir(os.path.abspath(os.curdir) + '/img/dian/')
                 await app.send_group_message(target=group,
                                              message=MessageChain(
@@ -218,7 +216,7 @@ async def no_c(app: Ariadne, group: Group, event: GroupMessage):
     if event.sender.id not in admins:
         return
     if group.id not in cache_var.no_c:
-        cache_var.no_6.append(group.id)
+        cache_var.no_dian.append(group.id)
         await botfunc.run_sql("""INSERT INTO no_dian VALUES (%s)""", (group.id,))
         await app.send_group_message(
             group,
@@ -239,7 +237,7 @@ async def yes_c(app: Ariadne, group: Group, event: GroupMessage):
     if event.sender.id not in admins:
         return
     if group.id in cache_var.no_c:
-        cache_var.no_c.remove(group.id)
+        cache_var.no_dian.remove(group.id)
         await botfunc.run_sql("""DELETE FROM no_dian WHERE gid = %s""", (group.id,))
         await app.send_group_message(
             group,

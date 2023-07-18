@@ -218,7 +218,7 @@ async def no_c(app: Ariadne, group: Group, event: GroupMessage):
     if event.sender.id not in admins:
         return
     if group.id not in cache_var.no_c:
-        cache_var.no_6.append(group.id)
+        cache_var.no_c.append(group.id)
         await botfunc.run_sql("""INSERT INTO no_c VALUES (%s)""", (group.id,))
         await app.send_group_message(
             group,
