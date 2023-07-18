@@ -13,4 +13,4 @@
 
 最后感谢括弧对Bot的支持！
 
-如果确实想使用，请查看[使用手册](https://github.com/ltzXiaoYanMo/YanBot_KHB_Edition/blob/main/starting.txt)
+如果确实想使用，请查看[使用手册](https://github.com/ltzXiaoYanMo/YanBot_KHB_Edition/blob/main/starting.md)
