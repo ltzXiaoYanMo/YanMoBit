@@ -22,10 +22,10 @@ import cache_var
 channel = Channel.current()
 channel.name("典")
 channel.description("你 典 你 吗")
-channel.author("ltzXiaoYanMo")
+channel.author("ltzXiaoYanMo,Emerald-AM9,daizihan233")
 
-sl1 = ["典", "孝", "急", "乐", "樂", "绷", "蚌"]  # 模糊匹配
-sl2 = ["赢"]  # 精确匹配
+sl1 = ["经典"]  # 模糊匹配
+sl2 = ["典", "孝", "急", "乐", "樂", "绷", "蚌", "赢"]  # 精确匹配
 jieba.load_userdict('./jieba_words.txt')
 
 
@@ -182,11 +182,11 @@ async def dian_le_beng(app: Ariadne, group: Group, event: GroupMessage, message:
         # 判断
         if cos >= 0.75:  # 判断为 "发典了"
             if data is not None:
-                await botfunc.run_sql("""UPDATE c SET count = count+1, ti = unix_timestamp() WHERE uid = %s""",
+                await botfunc.run_sql("""UPDATE dian SET count = count+1, ti = unix_timestamp() WHERE uid = %s""",
                                       (event.sender.id,))
             else:
-                await botfunc.run_sql("""INSERT INTO c VALUES (%s, 1, unix_timestamp())""", (event.sender.id,))
-            if group.id not in cache_var.no_c and (data is None or time.time() - data[2] >= 600):
+                await botfunc.run_sql("""INSERT INTO dian VALUES (%s, 1, unix_timestamp())""", (event.sender.id,))
+            if group.id not in cache_var.no_dian and (data is None or time.time() - data[2] >= 600):
                 img = os.listdir(os.path.abspath(os.curdir) + '/img/dian/')
                 await app.send_group_message(target=group,
                                              message=MessageChain(
@@ -198,13 +198,13 @@ async def dian_le_beng(app: Ariadne, group: Group, event: GroupMessage, message:
 
 
 @listen(GroupMessage)
-@decorate(MatchContent("典榜"))
+@decorate(MatchContent("典孝急榜"))
 async def six_top(app: Ariadne, group: Group, event: GroupMessage):
     data = await botfunc.select_fetchall("SELECT uid, count FROM dian ORDER BY count DESC LIMIT 21")
     try:
         msg = await selectivity_hide(data)
     except ValueError:
-        await app.send_group_message(group, MessageChain([At(event.sender.id), Plain("在目前并未有人发哦（")]),
+        await app.send_group_message(group, MessageChain([At(event.sender.id), Plain("在目前并未有人发典哦（")]),
                                      quote=event.source)
     else:
         await app.send_group_message(group, MessageChain([At(event.sender.id), Plain(" \n"), Plain("\n".join(msg))]),
@@ -212,13 +212,13 @@ async def six_top(app: Ariadne, group: Group, event: GroupMessage):
 
 
 @listen(GroupMessage)
-@decorate(MatchContent("典，结束检测"))
-async def no_c(app: Ariadne, group: Group, event: GroupMessage):
+@decorate(MatchContent("典孝急，闭嘴"))
+async def no_dian(app: Ariadne, group: Group, event: GroupMessage):
     admins = await botfunc.get_all_admin()
     if event.sender.id not in admins:
         return
-    if group.id not in cache_var.no_c:
-        cache_var.no_6.append(group.id)
+    if group.id not in cache_var.no_dian:
+        cache_var.no_dian.append(group.id)
         await botfunc.run_sql("""INSERT INTO no_dian VALUES (%s)""", (group.id,))
         await app.send_group_message(
             group,
@@ -233,13 +233,13 @@ async def no_c(app: Ariadne, group: Group, event: GroupMessage):
 
 
 @listen(GroupMessage)
-@decorate(MatchContent("典，检测"))
-async def yes_c(app: Ariadne, group: Group, event: GroupMessage):
+@decorate(MatchContent("典孝急，张嘴"))
+async def yes_dian(app: Ariadne, group: Group, event: GroupMessage):
     admins = await botfunc.get_all_admin()
     if event.sender.id not in admins:
         return
-    if group.id in cache_var.no_c:
-        cache_var.no_c.remove(group.id)
+    if group.id in cache_var.no_dian:
+        cache_var.no_dian.remove(group.id)
         await botfunc.run_sql("""DELETE FROM no_dian WHERE gid = %s""", (group.id,))
         await app.send_group_message(
             group,
