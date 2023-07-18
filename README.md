@@ -12,3 +12,5 @@
 此YanBot需要配置cloud.json（运行main.py自动生成）与config.yaml文件即可（色图需在modules中删除，详细请看Older版本）（但如果你要用Older版本确实也能用（草））
 
 最后感谢括弧对Bot的支持！
+
+如果确实想使用，请查看[使用手册](https://github.com/ltzXiaoYanMo/YanBot_KHB_Edition/blob/main/starting.txt)
