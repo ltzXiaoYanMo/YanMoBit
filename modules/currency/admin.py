@@ -10,12 +10,12 @@ import botfunc
 
 channel = Channel.current()
 channel.name("管理员")
-channel.description("114514")
-channel.author("HanTools")
+channel.description("加管理，没啥好说的")
+channel.author("ltzXiaoYanMo")
 
 
 @listen(GroupMessage)
-async def add_admin(app: Ariadne, group: Group, event: GroupMessage, message: MessageChain = DetectPrefix("上管")):
+async def add_admin(app: Ariadne, group: Group, event: GroupMessage, message: MessageChain = DetectPrefix("添加管理")):
     admins = await botfunc.get_all_admin()
     if event.sender.id not in admins:
         return
@@ -24,11 +24,11 @@ async def add_admin(app: Ariadne, group: Group, event: GroupMessage, message: Me
     except Exception as err:
         await app.send_message(group, f"寄！{err}")
     else:
-        await app.send_message(group, "OK!")
+        await app.send_message(group, "Oh♂Yeah!")
 
 
 @listen(GroupMessage)
-async def del_admin(app: Ariadne, group: Group, event: GroupMessage, message: MessageChain = DetectPrefix("去管")):
+async def del_admin(app: Ariadne, group: Group, event: GroupMessage, message: MessageChain = DetectPrefix("删除管理")):
     admins = await botfunc.get_all_admin()
     if event.sender.id not in admins:
         return
@@ -37,4 +37,4 @@ async def del_admin(app: Ariadne, group: Group, event: GroupMessage, message: Me
     except Exception as err:
         await app.send_message(group, f"寄！{err}")
     else:
-        await app.send_message(group, "OK!")
+        await app.send_message(group, "Fu♂ck you!")
