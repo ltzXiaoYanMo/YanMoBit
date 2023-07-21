@@ -7,6 +7,9 @@
 
     Windows：pip install pdm
     Linux：pip3 install pdm 或 pip3.11 install pdm
+    若未安装pip，在此目录下输入
+    Windows：python get-pip.py
+    Linux：python3 get-pip.py 或 pip3.11 get-pip.py
 安装完毕后，进入YanBot的目录，输入pdm install（数据支持来自Bugji，也就是括弧）<del>里面的numba和支持库因源已停止更新</del>在最新版中已经完全支持Python3.11，且无需安装也能正常使用。所以打“X”也无需慌张。此刻你已经安装完毕了依赖。
 
 2.安装QQBot支持-Mirai Console Loader
