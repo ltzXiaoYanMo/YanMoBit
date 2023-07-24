@@ -1,6 +1,4 @@
-#  本项目遵守 AGPL-3.0 协议，项目地址：https://github.com/daizihan233/MiraiHanBot
-
-#  本项目遵守 AGPL-3.0 协议，项目地址：https://github.com/daizihan233/MiraiHanBot
+#  本项目遵守 AGPL-3.0 协议，项目地址：https://github.com/ltzXiaoYanMo/YanBot_KHB_Edition
 
 import json
 
@@ -17,12 +15,12 @@ import botfunc
 
 channel = Channel.current()
 channel.name("摸鱼日记")
-channel.description("上班是不可能上班的~")
-channel.author("HanTools")
+channel.description("某种意义上，摸鱼还是一种很爽的一件事")
+channel.author("ltzXiaoYanMo")
 
 
 @listen(GroupMessage)
-@decorate(MatchContent("鱼"))
+@decorate(MatchContent("摸鱼时刻到"))
 async def fish(app: Ariadne, group: Group, event: GroupMessage):
     data: str = json.loads(botfunc.session.get("http://bjb.yunwj.top/php/mo-yu/php.php").text)['wb']
     data: str = data.replace('【换行】', '\n')
