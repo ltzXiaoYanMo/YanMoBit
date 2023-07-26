@@ -18,7 +18,7 @@ channel.author("ltzXiaoYanMo")
 
 @channel.use(ListenerSchema(listening_events=[GroupMessage]))
 async def echo(app: Ariadne, group: Group, source: Source, message: MessageChain = DetectPrefix("/echo ")):
-    if not str(message).startswith('/echo','6','9','c''草'):
+    if not str(message).startswith('/echo','6','9','c','草','六'):
         m: ActiveGroupMessage = await app.send_group_message(
             group,
             message,
