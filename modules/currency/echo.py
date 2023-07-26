@@ -13,12 +13,12 @@ import botfunc
 channel = Channel.current()
 channel.name("echo")
 channel.description("echo 第一个输出")
-channel.author("HanTools")
+channel.author("ltzXiaoYanMo")
 
 
 @channel.use(ListenerSchema(listening_events=[GroupMessage]))
 async def echo(app: Ariadne, group: Group, source: Source, message: MessageChain = DetectPrefix("/echo ")):
-    if not str(message).startswith('/echo'):
+    if not str(message).startswith('/echo','6','9','c''草'):
         m: ActiveGroupMessage = await app.send_group_message(
             group,
             message,
