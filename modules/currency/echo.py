@@ -16,17 +16,22 @@ channel.description("echo 第一个输出")
 channel.author("ltzXiaoYanMo")
 
 
-@channel.use(ListenerSchema(listening_events=[GroupMessage]))
 async def echo(app: Ariadne, group: Group, source: Source, message: MessageChain = DetectPrefix("/echo ")):
-    if (not str(message).startwith("/echo")) and ("6") and ("c") and ("六") and ("tcl"):
-        m: ActiveGroupMessage = await app.send_group_message(
-            group,
-            message,
-        )
-        botfunc.r.hset('echo', source.id, m.source.id)
+    text = str(message)
+    if text.startswith('/echo'):
+        return
+    elif text.startswith('6'):
+        return
+    elif text.startswith('c'):
+        return
+    elif text.startswith('tcl'):
+        return
+
+    m: ActiveGroupMessage = await app.send_group_message(group, message)
+    botfunc.r.hset('echo', source.id, m.source.id)
 
 @channel.use(ListenerSchema(listening_events=[GroupRecallEvent]))
-async def echo(app: Ariadne, group: Group, event: GroupRecallEvent):
+async def echo_recall(app: Ariadne, group: Group, event: GroupRecallEvent):
     if botfunc.r.hexists("echo", event.message_id):
         await app.recall_message(botfunc.r.hget("echo", event.message_id), group)
         botfunc.r.hdel("echo", event.message_id)
