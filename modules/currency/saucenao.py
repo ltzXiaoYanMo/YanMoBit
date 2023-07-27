@@ -48,7 +48,7 @@ async def saucenao(app: Ariadne, group: Group, message: MessageChain, event: Gro
     if not image_results:
         await app.send_group_message(group, MessageChain(Plain("没搜到！qwq")), quote=event.source)
         return
-    await app.send_group_message(group, "让图片飞一会儿……", quote=event.source)
+    await app.send_group_message(group, "让图片飞一会儿…", quote=event.source)
     for node in image_results[:min(len(image_results), 10)]:
         if not node['data'].get("ext_urls", None):
             continue
