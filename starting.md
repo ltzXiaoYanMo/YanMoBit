@@ -3,6 +3,16 @@
 
 首先，YanBot的所有版本都以Python编写，且KHB的Python版本>=3.10，<del>OpenMariya的Python>=3.11且双方获取模块方式不一样，这里是KHB的方式</del>。OM的版本也没了（
 
+我建议部署此Bot的时候，可以使用git此仓库（或者fork到自己仓库进行git clone）
+
+安装git的方式：
+
+Windows:winget install git
+
+Debian/Ubuntu:sudo apt-get install git -y
+
+CentOS/Red Hat:sudo yum install git -y
+
 安装pdm，输入以下字符安装pdm
 
     Windows：pip install pdm
