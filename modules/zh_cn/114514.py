@@ -63,5 +63,5 @@ async def homo(app: Ariadne, group: Group, source: Source, event: GroupMessage):
     await app.send_message(
         target=group,
         quote=source,
-        message='香啊，很香啊'
+        message='压力吗斯内'
     )
