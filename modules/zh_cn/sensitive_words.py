@@ -87,7 +87,7 @@ async def f(app: Ariadne, group: Group, event: GroupMessage):
                 logger.error('无权操作！')
             else:
                 await app.send_message(event.sender.group, MessageChain(
-                    [At(event.sender.id), "你的消息涉及敏感内容，为保护群聊消息已被撤回"]))
+                    [At(event.sender.id), "你的消息涉及敏感内容，为保护群聊消息已撤回"]))
             await botfunc.run_sql('UPDATE wd SET count=count+1 WHERE wd=%s', (str(event.message_chain),))
             return
         wd = jieba.lcut(  # 准确率：分词
