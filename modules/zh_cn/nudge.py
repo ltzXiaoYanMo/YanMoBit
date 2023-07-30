@@ -23,7 +23,7 @@ from modules import globalvars
 
 channel = Channel.current()
 channel.name("戳一戳，你就知道！")
-channel.description("你戳你m呢")
+channel.description("你戳你m呢，你看你m呢，啊？")
 channel.author("ltzXiaoYanMo")
 
 saya = Saya.current()
