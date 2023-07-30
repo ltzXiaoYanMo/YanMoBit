@@ -32,7 +32,7 @@ channel = Channel.current()
 
 @channel.use(ListenerSchema(listening_events=[NudgeEvent]))
 async def nudge(app: Ariadne, event: NudgeEvent):
-    # 只检测被戳的是不是机器人
+    # 只检测被戳的是不是本机器人
     print(event.target)
     if event.target == globalvars.bot_qq:
         if event.context_type == "group":
