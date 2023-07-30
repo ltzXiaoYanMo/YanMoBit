@@ -1,8 +1,5 @@
-
-from aiohttp import ClientSession
 from creart import create
 from graia.ariadne.app import Ariadne
-from graia.ariadne.event.message import GroupMessage, FriendMessage
 from graia.ariadne.event.mirai import NewFriendRequestEvent, BotInvitedJoinGroupRequestEvent, MemberJoinRequestEvent, \
     MemberCardChangeEvent, GroupRecallEvent, MemberLeaveEventKick, MemberLeaveEventQuit, MemberJoinEvent
 from graia.ariadne.message.chain import MessageChain
@@ -16,6 +13,11 @@ from modules import globalvars
 saya = Saya.current()
 channel = Channel.current()
 bcc = create(Broadcast)
+
+channel = Channel.current()
+channel.name("检测群聊")
+channel.description("你的群聊很珍贵，需要很好地保护（？）")
+channel.author("ltzXiaoYanMo")
 
 # 侦测加群请求
 @channel.use(ListenerSchema(listening_events=[MemberJoinRequestEvent]))
