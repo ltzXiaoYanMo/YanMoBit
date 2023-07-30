@@ -39,5 +39,5 @@ async def nudge(app: Ariadne, event: NudgeEvent):
             await app.send_group_message(
                 event.group_id,
                 MessageChain(MessageChain(
-                    [At(event.supplicant), Plain("你 戳 你 吗")]))
+                    [At(event.supplicant), Plain(" 你 戳 你 吗")]))
             )

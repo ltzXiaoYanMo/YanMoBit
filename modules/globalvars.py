@@ -11,3 +11,6 @@
 
 
 bot_qq = 1373892821
+owner_qq = 2315049216
+blocklist = []
+g_blocklist = []
