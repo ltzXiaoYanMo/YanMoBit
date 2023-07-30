@@ -14,3 +14,8 @@ bot_qq = 1373892821
 owner_qq = 2315049216
 blocklist = []
 g_blocklist = []
+
+# bot_qq：填写你的QQ账号
+# owner_qq：填写主人（所有者，也就是你）的QQ账号
+# blocklist：黑名单，检测入群申请时的黑名单，非/modules/zh_cn中的blacklist.py
+# g_blocklist：交互黑名单，填写你所知的QQ机器人
