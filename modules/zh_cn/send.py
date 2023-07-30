@@ -14,10 +14,10 @@ saya = Saya.current()
 channel = Channel.current()
 bcc = create(Broadcast)
 
-channel = Channel.current()
-channel.name("发送私聊")
-channel.description("本质上，貌似本质就是为了私聊Bot制作人员？")
-channel.author("ltzXiaoYanMo")
+# channel = Channel.current()
+# channel.name("发送私聊")
+# channel.description("本质上，貌似本质就是为了私聊Bot制作人员？")
+# channel.author("ltzXiaoYanMo")
 
 @channel.use(ListenerSchema(listening_events=[FriendMessage]))
 async def friend_message(app: Ariadne, event: FriendMessage):
