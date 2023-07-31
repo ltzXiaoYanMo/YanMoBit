@@ -57,7 +57,7 @@ YanBot与KuoHuBit的配置其实都很简单，都是更改cloud.json和config.y
 
 这边注意下，cloud.json仅支持MySQL，<del>用户也仅支持root</del>，在新版中已经支持其他用户；config.yaml的色图功能需在/modules/zh-cn/setu.py和/modules/zh-cht/setu.py这俩Python可执行文件删除即可关闭。
 
-在最新版的YanBot当中，你需要在/modules/globalvars.py填写bot_qq和owner_qq这两个必要数据
+在最新版的YanBot当中，你需要在globalvars.py填写bot_qq和owner_qq这两个必要数据
 
 4.配置结束，启动和使用YanBot
 

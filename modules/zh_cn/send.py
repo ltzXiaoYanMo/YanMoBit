@@ -16,8 +16,6 @@ channel.name("发送私聊")
 channel.description("貌似本质上就是为了私聊Bot制作人员？")
 channel.author("ltzXiaoYanMo")
 
-
-# @channel.use(ListenerSchema(listening_events=[FriendMessage])) 源自2kbit-py
 @channel.use(ListenerSchema(listening_events=[FriendMessage]))
 async def friend_message(app: Ariadne, event: FriendMessage):
     if event.sender.id != globalvars.owner_qq:
