@@ -1,4 +1,6 @@
-import random
+# 项目Github源码:https://github.com/ltzXiaoYanMo/YanBot_KHB_Edition
+
+# Mirai输出日志:023-07-31 12:09:17.762 | INFO | graia.ariadne.model:log:82 - 1373892821: [RECV][PythonGarbage(2315049216)] -> 1
 
 from creart import create
 from graia.ariadne.app import Ariadne
@@ -16,10 +18,11 @@ bcc = create(Broadcast)
 
 channel = Channel.current()
 channel.name("发送私聊")
-channel.description("本质上，貌似本质就是为了私聊Bot制作人员？")
+channel.description("貌似本质上就是为了私聊Bot制作人员？")
 channel.author("ltzXiaoYanMo")
 
-@channel.use(ListenerSchema(listening_events=[FriendMessage]))
+# @channel.use(ListenerSchema(listening_events=[FriendMessage])) 源自2kbit-py
+@channel.use(ListenerSchema(listening_events=[GroupMessage, NudgeEvent]))
 async def friend_message(app: Ariadne, event: FriendMessage):
     if not event.sender.id == globalvars.owner_qq:
         messageChain = (Plain(f"消息来自：{event.sender.nickname} ({event.sender.id})\n消息内容："))
