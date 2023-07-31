@@ -11,6 +11,7 @@ from graia.broadcast import Broadcast
 from graia.saya import Channel, Saya
 from graia.saya.builtins.broadcast import ListenerSchema
 from graia.ariadne.event.mirai import NudgeEvent
+from graia.ariadne.event.message import FriendMessage
 from modules import globalvars
 
 saya = Saya.current()
@@ -33,10 +34,10 @@ async def friend_message(app: Ariadne, event: FriendMessage):
         await app.send_friend_message(
             globalvars.owner_qq,
             MessageChain(
-                "你可以使!send <目标QQ> <消息>来发送私聊消息"
+                "你可以使用!send <目标QQ> <消息>来发送私聊消息"
             )
         )
-    elif event.sender.id == globalvars.owner_qq and event.message_chain.startswith("!send"):
+    elif event.sender.id == globalvars.owner_qq and event.message_chain.asDisplay().startswith("!send"):
         result = event.message_chain.removeprefix("!send ").split(" ")
         if len(result) >= 2:
             try:
