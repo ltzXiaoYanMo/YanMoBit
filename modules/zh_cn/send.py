@@ -29,7 +29,7 @@ async def friend_message(app: Ariadne, event: FriendMessage):
         await app.send_friend_message(
             globalvars.owner_qq,
             MessageChain(
-                "你可以使用/send <目标QQ> <消息>来发送私聊消息"
+                "你可以使!send <目标QQ> <消息>来发送私聊消息"
             )
         )
     elif event.sender.id == globalvars.owner_qq and event.message_chain.startswith("!send"):
