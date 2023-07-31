@@ -10,6 +10,7 @@ from graia.ariadne.message.element import At, Plain, Image
 from graia.broadcast import Broadcast
 from graia.saya import Channel, Saya
 from graia.saya.builtins.broadcast import ListenerSchema
+from graia.ariadne.event.mirai import NudgeEvent
 from modules import globalvars
 
 saya = Saya.current()
