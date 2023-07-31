@@ -19,7 +19,7 @@ from graia.ariadne.message.chain import MessageChain, Plain
 from graia.ariadne.message.element import At
 from graia.saya import Channel, Saya
 from graia.saya.builtins.broadcast.schema import ListenerSchema
-from modules import globalvars
+import globalvars
 
 channel = Channel.current()
 channel.name("戳一戳，你就知道！")
@@ -34,8 +34,7 @@ channel = Channel.current()
 async def nudge(app: Ariadne, event: NudgeEvent):
     # 只检测被戳的是不是本机器人
     print(event.target)
-    if event.target == globalvars.bot_qq:
-        if event.context_type == "group":
+    if event.target == globalvars.bot_qq and event.context_type == "group":
             await app.send_group_message(
                 event.group_id,
                 MessageChain(MessageChain(
