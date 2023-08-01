@@ -56,7 +56,7 @@ async def nmsl(app: Ariadne, event: GroupMessage, message: MessageChain = Detect
             await app.send_message(event.sender.group, "啥比，输错辣")
             return
         except pymysql.err.IntegrityError:
-            await app.send_message(event.sender.group, "此账号已在数据库当中")
+            await app.send_message(event.sender.group, "此账号已在数据库当中，若还是踢不出，那踢踢你的（？）")
             return
         else:
             try:
