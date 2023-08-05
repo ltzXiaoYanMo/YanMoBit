@@ -15,7 +15,7 @@ import botfunc
 
 channel = Channel.current()
 channel.name("黑名单")
-channel.description("傻逼东西")
+channel.description("吊你吗")
 channel.author("ltzXiaoYanMo")
 
 
