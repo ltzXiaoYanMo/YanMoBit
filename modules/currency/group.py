@@ -8,6 +8,7 @@ from graia.saya import Channel
 from graia.saya.builtins.broadcast import ListenerSchema
 
 import globalvars
+import os
 
 channel = Channel.current()
 channel.name("检测群聊")
@@ -38,10 +39,12 @@ async def card_change(app: Ariadne, event: MemberCardChangeEvent, group: Group):
 @channel.use(ListenerSchema(listening_events=[GroupRecallEvent]))
 async def recall_detect(app: Ariadne, event: GroupRecallEvent, group: Group):
     if event.operator.permission not in [MemberPerm.Administrator, MemberPerm.Owner]:
-        await app.send_message(
-            group,
-            MessageChain(At(event.operator.id), Plain(" 撤回啥了？让我看看！")),
-        )
+                await app.send_group_message(target=group,
+                                             message=MessageChain(
+                                                 [At(event.sender.id),
+                                                  Image(path=os.path.abspath(os.curdir) + '/img/recall/' + random.choice(
+                                                      img))]),
+                                             quote=event.source)
 
 
 # 侦测踢人
