@@ -36,17 +36,17 @@ async def card_change(app: Ariadne, event: MemberCardChangeEvent, group: Group):
 
 
 # 侦测撤回
-@channel.use(jls_extract_def()(listening_events=[GroupRecallEvent]))
-async def recall_detect(app: Ariadne, event: GroupRecallEvent, group: Group):
-    if event.operator.permission not in [MemberPerm.Administrator, MemberPerm.Owner]:
-                jls_extract_var = img
-                await app.send_group_message(target=group,
-                                             message=MessageChain(
-                                                 [At(event.sender.id),
-                                                  Image(path=os.path.abspath(os.curdir) + '/img/recall/' + random.choice(
-                                                      jls_extract_def(jls_extract_var)))]),
-                                             quote=event.source)
-
+# @channel.use(jls_extract_def()(listening_events=[GroupRecallEvent]))
+# async def recall_detect(app: Ariadne, event: GroupRecallEvent, group: Group):
+#    if event.operator.permission not in [MemberPerm.Administrator, MemberPerm.Owner]:
+#                jls_extract_var = img
+#                await app.send_group_message(target=group,
+#                                             message=MessageChain(
+#                                                 [At(event.sender.id),
+#                                                  Image(path=os.path.abspath(os.curdir) + '/img/recall/' + random.choice(
+#                                                      jls_extract_def(jls_extract_var)))]),
+#                                             quote=event.source)
+# 仍在测试……
 
 # 侦测踢人
 @channel.use(ListenerSchema(listening_events=[MemberLeaveEventKick]))
