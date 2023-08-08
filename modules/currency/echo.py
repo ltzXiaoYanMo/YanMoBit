@@ -14,7 +14,7 @@ channel = Channel.current()
 channel.name("echo")
 channel.description("echo 第一个输出")
 channel.author("ltzXiaoYanMo")
-ignore = ("/echo", "6")
+ignore = ("/echo", "6", "c", "草", "9")
 
 
 @channel.use(ListenerSchema(listening_events=[GroupMessage]))
