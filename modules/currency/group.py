@@ -37,7 +37,7 @@ async def card_change(app: Ariadne, event: MemberCardChangeEvent, group: Group):
 
 
 # 侦测撤回
-@channel.use(jls_extract_def()(listening_events=[GroupRecallEvent]))
+@channel.use(ListenerSchema(listening_events=[GroupRecallEvent]))
 async def recall_detect(app: Ariadne, event: GroupRecallEvent, group: Group):
     if event.operator.permission not in [MemberPerm.Administrator, MemberPerm.Owner]:
                 await app.recall_group_message(target=group,
