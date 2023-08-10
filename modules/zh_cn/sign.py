@@ -29,3 +29,10 @@ async def echo(app: Ariadne, group: Group, source: Source, message: MessageChain
                 MessageChain(MessageChain(
                     [At(event.supplicant), Plain(" 打卡成功辣!")]))
             )
+            if cos >= 0.75:  # 切入数据库
+                if data is not None:
+                    await botfunc.run_sql("""UPDATE sign SET count = count+1, ti = unix_timestamp() WHERE uid = %s""",
+                                          (event.sender.id,))
+                else:
+                    await botfunc.run_sql("""INSERT INTO sign VALUES (%s, 1, unix_timestamp())""", (event.sender.id,))
+                if group.id not in cache_var.no_6 and (data is None or time.time() - data[2] >= 600):
