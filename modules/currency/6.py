@@ -230,7 +230,7 @@ async def no_six(app: Ariadne, group: Group, event: GroupMessage):
             MessageChain(
                 [
                     At(event.sender.id),
-                    Plain("好啊，很好啊。你品，你细品")
+                    Plain(" 好啊，很好啊。你品，你细品")
                 ]
             ),
             quote=event.source
