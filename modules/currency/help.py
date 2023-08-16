@@ -1,3 +1,5 @@
+# 项目地址：https://github.com/ltzXiaoYanMo/YanBot_KHB_Edition
+
 from graia.ariadne.app import Ariadne
 from graia.ariadne.message.chain import MessageChain, Plain
 from graia.saya import Channel, Saya
@@ -12,11 +14,11 @@ channel.author("ltzXiaoYanMo")
     ListenerSchema(
         listening_events=[GroupMessage],
         inline_dispatchers=[CoolDown(0.1)],
-        decorators=[DetectPrefix("官方KHB网站：https://bot.khbit.cn")],
+        decorators={DetectPrefix("官方网站，请前往https://bot.ymbot.top")},
     )
 )
 async def setu(app: Ariadne, group: Group, message: MessageChain):
     await app.send_message(
         group,
-        MessageChain(f"若你想查看修改版的，请前往https://bot.ymbot.top"),
+        MessageChain(f"KHB网站：https://bot.khbit.cn"),
     )
