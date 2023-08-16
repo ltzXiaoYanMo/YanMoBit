@@ -40,13 +40,16 @@ async def card_change(app: Ariadne, event: MemberCardChangeEvent, group: Group):
 # 侦测撤回
 @channel.use(ListenerSchema(listening_events=[GroupRecallEvent]))
 async def recall_detect(app: Ariadne, event: GroupRecallEvent, group: Group):
-    if event.operator.permission not in [MemberPerm.Administrator, MemberPerm.Owner]:
-                await app.recall_group_message(target=group,
-                                             message=MessageChain(
-                                                 [At(event.sender.id),
-                                                  Image(path=os.path.abspath(os.curdir) + '/img/recall/' + random.choice(
-                                                      jls_extract_def(jls_extract_var)))]),
-                                             quote=event.source)
+    messageChain = (At(event.operator.id), Plain(" 撤回啥了？让我看看！"))
+    print(event.operator.permission)
+    if not event.operator.permission == "ADMINISTRATOR" and not event.operator.permission == "OWNER":
+        try:
+            await app.send_message(
+                group,
+                MessageChain(messageChain),
+            )
+        except:
+            print("群消息发送失败")
 
 
 # 侦测踢人
@@ -74,5 +77,5 @@ async def quit_detect(app: Ariadne, event: MemberLeaveEventQuit, group: Group):
 async def join_detect(app: Ariadne, event: MemberJoinEvent, group: Group):
     await app.send_message(
         group,
-        MessageChain(At(event.member.id), Plain(" 来辣！")),
+        MessageChain(At(event.member.id), Plain(" 来辣！本Bot官方文档https://bot.ymbot.top")),
     )
