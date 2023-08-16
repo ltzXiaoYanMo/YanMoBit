@@ -12,11 +12,11 @@ channel.author("ltzXiaoYanMo")
     ListenerSchema(
         listening_events=[GroupMessage],
         inline_dispatchers=[CoolDown(0.1)],
-        decorators=[DetectPrefix("你好")],
+        decorators=[DetectPrefix("官方KHB网站：https://bot.khbit.cn")],
     )
 )
 async def setu(app: Ariadne, group: Group, message: MessageChain):
     await app.send_message(
         group,
-        MessageChain(f"不要说{message.display}，来点涩图"),
+        MessageChain(f"若你想查看修改版的，请前往https://bot.ymbot.top"),
     )
