@@ -19,7 +19,7 @@ channel.author("HanTools")
 
 
 @listen(GroupMessage)
-@decorate(MatchContent("6，閉嘴"))
+@decorate(MatchContent("6，閉个嘴"))
 async def no_six(app: Ariadne, group: Group, event: GroupMessage):
     admins = await botfunc.get_all_admin()
     if event.sender.id not in admins:
@@ -40,7 +40,7 @@ async def no_six(app: Ariadne, group: Group, event: GroupMessage):
 
 
 @listen(GroupMessage)
-@decorate(MatchContent("6，張嘴"))
+@decorate(MatchContent("6，張个嘴"))
 async def yes_six(app: Ariadne, group: Group, event: GroupMessage):
     admins = await botfunc.get_all_admin()
     if event.sender.id not in admins:
