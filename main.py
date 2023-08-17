@@ -6,6 +6,7 @@
 import os
 
 import pymysql
+import requests
 from creart import create
 from graia.ariadne.app import Ariadne
 from graia.ariadne.connection.config import (
@@ -15,6 +16,7 @@ from graia.ariadne.connection.config import (
 )
 from graia.saya import Saya
 from loguru import logger
+from rich.progress import track
 
 import botfunc
 import cache_var
@@ -28,11 +30,19 @@ app = Ariadne(
         WebsocketClientConfig(host=botfunc.get_config('mirai_api_http')),
     ),
 )
-conn = pymysql.connect(host=botfunc.get_cloud_config('MySQL_Host'), port=botfunc.get_cloud_config('MySQL_Port'),
-                       user=botfunc.get_cloud_config('MySQL_User'),
-                       password=botfunc.get_cloud_config('MySQL_Pwd'), charset='utf8mb4',
-                       database=botfunc.get_cloud_config('MySQL_db'))
-cursor = conn.cursor()
+try:
+    conn = pymysql.connect(host=botfunc.get_cloud_config('MySQL_Host'), port=botfunc.get_cloud_config('MySQL_Port'),
+                           user=botfunc.get_cloud_config('MySQL_User'),
+                           password=botfunc.get_cloud_config('MySQL_Pwd'), charset='utf8mb4',
+                           database=botfunc.get_cloud_config('MySQL_db'))
+    cursor = conn.cursor()
+except pymysql.err.InternalError:
+    conn = pymysql.connect(host=botfunc.get_cloud_config('MySQL_Host'), port=botfunc.get_cloud_config('MySQL_Port'),
+                           user=botfunc.get_cloud_config('MySQL_User'),
+                           password=botfunc.get_cloud_config('MySQL_Pwd'), charset='utf8mb4')
+    cursor = conn.cursor()
+    cursor.execute("""create database if not exists %s""", (botfunc.get_cloud_config('MySQL_db'),))
+
 cursor.execute("""create table if not exists admin
 (
     uid bigint unsigned default '0' not null
@@ -105,6 +115,37 @@ cursor.execute("""CREATE TABLE IF NOT EXISTS `no_dian` (
 `gid` bigint UNSIGNED NOT NULL PRIMARY KEY COMMENT '群号'
 ) ENGINE = innodb DEFAULT CHARACTER SET = "utf8mb4" COLLATE = "utf8mb4_general_ci" """)
 
+conn.commit()
+
+cursor.execute('SELECT wd, count FROM wd')
+cache_var.sensitive_words = [x[0] for x in cursor.fetchall()]
+if not cache_var.sensitive_words:
+    print("未找到敏感词库！即将从GitHub仓库拉取……（请保证能正常访问jsDelivr）")
+    input("> 是否继续？（回车 | 继续 / ^C | 退出）")
+    # 色情类
+    d = requests.get(
+        "https://cdn.jsdelivr.net/gh/fwwdn/sensitive-stop-words@master/%E8%89%B2%E6%83%85%E7%B1%BB.txt").text.split(
+        ',\n')
+    # 政治类
+    d.extend(
+        requests.get(
+            "https://cdn.jsdelivr.net/gh/fwwdn/sensitive-stop-words@master/%E6%94%BF%E6%B2%BB%E7%B1%BB.txt"
+        ).text.split(',\n')
+    )
+    # 违法类
+    d.extend(
+        requests.get(
+            "https://cdn.jsdelivr.net/gh/fwwdn/sensitive-stop-words@master/%E6%B6%89%E6%9E%AA%E6%B6%89%E7%88%86%E8%BF"
+            "%9D%E6%B3%95%E4%BF%A1%E6%81%AF%E5%85%B3%E9%94%AE%E8%AF%8D.txt"
+        ).text.split(',\n')
+    )
+    d.pop(-1)  # 上面的这些加载出来在列表末尾会多出一堆乱码，故删除，如果你需要魔改此部分请视情况自行删除
+    for w in track(d, description="Loading"):
+        cursor.execute("INSERT INTO wd VALUES (%s, 0)", (w,))
+        try:
+            conn.commit()
+        except pymysql.err.DataError:
+            conn.rollback()
 cursor.execute('SELECT wd, count FROM wd')
 cache_var.sensitive_words = [x[0] for x in cursor.fetchall()]
 
@@ -115,6 +156,8 @@ cursor.execute('SELECT uid FROM admin')
 if not cursor.fetchall():
     admin_uid = int(input("未找到任何一个op！请输入你（op）的QQ号："))
     cursor.execute("INSERT INTO admin VALUES (%s)", (admin_uid,))
+
+conn.commit()
 
 cursor.execute('SELECT gid FROM inm')
 cache_var.inm = [x[0] for x in cursor.fetchall()]
