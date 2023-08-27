@@ -16,3 +16,5 @@
 如果确实想使用，请查看[使用手册](https://github.com/ltzXiaoYanMo/YanBot_KHB_Edition/blob/main/starting.md)
 
 在最近的一次更新，已经引入[2kbit-py](https://github.com/Abjust/2kbit-py)的部分代码，虽然已经停止更新，但不代表我们不更新啊（雾）
+
+在2023/8/26日时，项目的Bot遭tx封禁，且在中国地区已经上学，暂且无法更新。
