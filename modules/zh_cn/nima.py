@@ -60,7 +60,6 @@ async def send_ru(app: Ariadne, sender: Member or Friend):
     if index > len(rutext) - 1:
         index = 0
 
-
 @listen(TempMessage)
 async def rulai(app: Ariadne, sender: Member):
     await send_ru(app, sender)
