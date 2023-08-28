@@ -64,6 +64,8 @@ except FileNotFoundError:
     safe_file_write('dynamic_config.yaml', """mute:
 - null
 word:
+- null
+img:
 - null""")
     logger.warning('dynamic_config.yaml 已被程序自动创建')
 
@@ -81,7 +83,7 @@ def get_cloud_config(name: str):
         return cloud_config_json[name]
     except KeyError:
         logger.error(f'{name} 在配置文件中找不到')
-        return None
+        return ""
 
 
 def get_dyn_config(name: str):
@@ -89,7 +91,7 @@ def get_dyn_config(name: str):
         return dyn_yaml[name]
     except KeyError:
         logger.error(f'{name} 在配置文件中找不到')
-        return None
+        return []
 
 
 async def select_fetchone(sql, arg=None):

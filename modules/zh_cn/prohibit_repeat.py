@@ -1,7 +1,3 @@
-#  本项目遵守 AGPL-3.0 协议，项目地址：https://github.com/daizihan233/MiraiHanBot
-
-#  本项目遵守 AGPL-3.0 协议，项目地址：https://github.com/daizihan233/MiraiHanBot
-
 import time
 import urllib.parse
 
@@ -13,12 +9,12 @@ from graia.ariadne.message.chain import MessageChain
 from graia.ariadne.message.element import Plain, At
 from graia.ariadne.message.parser.base import MatchContent
 from graia.ariadne.model import Group, Member, MemberPerm
-from graia.ariadne.util.saya import listen, decorate
 from graia.saya import Channel
 from graia.saya.builtins.broadcast.schema import ListenerSchema
 from loguru import logger
 
 import botfunc
+import depen
 from botfunc import r
 
 channel = Channel.current()
@@ -59,22 +55,39 @@ async def repeat_record(app: Ariadne, group: Group, member: Member, message: Mes
             r.hset(hash_name, f'{group.id},{member.id}', f"1,{time.time()},{urllib.parse.quote(str(message))}")
 
 
-@listen(GroupMessage)
-@decorate(MatchContent("开启防刷屏"))
+@channel.use(
+    ListenerSchema(
+        listening_events=[GroupMessage],
+        decorators=[
+            MatchContent("开启本群防刷屏"),
+            depen.check_authority_op()
+        ]
+    )
+)
 async def start_mute(app: Ariadne, group: Group, event: GroupMessage):
-    with open(dyn_config, 'r') as cf:
-        cfy = yaml.safe_load(cf)
-    cfy['mute'].append(group.id)
-    cfy['mute'] = list(set(cfy["mute"]))
-    with open(dyn_config, 'w') as cf:
-        yaml.dump(cfy, cf)
-    await app.send_message(group, MessageChain(At(event.sender.id), Plain(" OK辣！")))
+    admin = await botfunc.get_all_admin()
+    if event.sender.permission in [MemberPerm.Administrator, MemberPerm.Owner] or event.sender.id in admin:
+        with open(dyn_config, 'r') as cf:
+            cfy = yaml.safe_load(cf)
+        cfy['mute'].append(group.id)
+        cfy['mute'] = list(set(cfy["mute"]))
+        with open(dyn_config, 'w') as cf:
+            yaml.dump(cfy, cf)
+        await app.send_message(group, MessageChain(At(event.sender.id), Plain(" OK辣！")))
 
 
-@listen(GroupMessage)
-@decorate(MatchContent("关闭防刷屏"))
+@channel.use(
+    ListenerSchema(
+        listening_events=[GroupMessage],
+        decorators=[
+            MatchContent("关闭本群防刷屏"),
+            depen.check_authority_op()
+        ]
+    )
+)
 async def stop_mute(app: Ariadne, group: Group, event: GroupMessage):
-    if event.sender.permission in [MemberPerm.Administrator, MemberPerm.Owner]:
+    admin = await botfunc.get_all_admin()
+    if event.sender.permission in [MemberPerm.Administrator, MemberPerm.Owner] or event.sender.id in admin:
         with open(dyn_config, 'r') as cf:
             cfy = yaml.safe_load(cf)
         try:

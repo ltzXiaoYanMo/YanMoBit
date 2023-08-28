@@ -98,22 +98,6 @@ cursor.execute("""CREATE TABLE IF NOT EXISTS `no_six` (
 cursor.execute("""CREATE TABLE IF NOT EXISTS `inm` ( 
 `gid` bigint UNSIGNED NOT NULL PRIMARY KEY COMMENT '群号'
 ) ENGINE = innodb DEFAULT CHARACTER SET = "utf8mb4" COLLATE = "utf8mb4_general_ci" """)
-cursor.execute("""CREATE TABLE IF NOT EXISTS `c` ( 
-`uid` bigint UNSIGNED NOT NULL PRIMARY KEY COMMENT 'QQ号' ,
-`count` int UNSIGNED NOT NULL DEFAULT 0 COMMENT 'c 的次数',
-`ti` bigint UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后一次"c"发送时间'
-) ENGINE = innodb DEFAULT CHARACTER SET = "utf8mb4" COLLATE = "utf8mb4_general_ci" """)
-cursor.execute("""CREATE TABLE IF NOT EXISTS `no_c` ( 
-`gid` bigint UNSIGNED NOT NULL PRIMARY KEY COMMENT '群号'
-) ENGINE = innodb DEFAULT CHARACTER SET = "utf8mb4" COLLATE = "utf8mb4_general_ci" """)
-cursor.execute("""CREATE TABLE IF NOT EXISTS `dian` ( 
-`uid` bigint UNSIGNED NOT NULL PRIMARY KEY COMMENT 'QQ号' ,
-`count` int UNSIGNED NOT NULL DEFAULT 0 COMMENT '典 的次数',
-`ti` bigint UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后一次"典"发送时间'
-) ENGINE = innodb DEFAULT CHARACTER SET = "utf8mb4" COLLATE = "utf8mb4_general_ci" """)
-cursor.execute("""CREATE TABLE IF NOT EXISTS `no_dian` ( 
-`gid` bigint UNSIGNED NOT NULL PRIMARY KEY COMMENT '群号'
-) ENGINE = innodb DEFAULT CHARACTER SET = "utf8mb4" COLLATE = "utf8mb4_general_ci" """)
 
 conn.commit()
 
@@ -121,7 +105,7 @@ cursor.execute('SELECT wd, count FROM wd')
 cache_var.sensitive_words = [x[0] for x in cursor.fetchall()]
 if not cache_var.sensitive_words:
     print("未找到敏感词库！即将从GitHub仓库拉取……（请保证能正常访问jsDelivr）")
-    input("> 是否继续？（回车 | 继续 / ^C | 退出）")
+    input("> 是否继续？（回车 继续 / ^C 退出）")
     # 色情类
     d = requests.get(
         "https://cdn.jsdelivr.net/gh/fwwdn/sensitive-stop-words@master/%E8%89%B2%E6%83%85%E7%B1%BB.txt").text.split(

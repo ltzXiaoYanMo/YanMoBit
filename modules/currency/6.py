@@ -1,5 +1,3 @@
-#  本项目遵守 AGPL-3.0 协议，项目地址：https://github.com/daizihan233/MiraiHanBot
-
 import os
 import random
 import re
@@ -13,45 +11,31 @@ from graia.ariadne.event.message import GroupMessage
 from graia.ariadne.message.element import Plain, At, Image
 from graia.ariadne.message.parser.base import MatchContent
 from graia.ariadne.model import Group
-from graia.ariadne.util.saya import listen, decorate
 from graia.saya import Channel
+from graia.saya.builtins.broadcast import ListenerSchema
 
 import botfunc
 import cache_var
+import depen
 
 channel = Channel.current()
 channel.name("6榜")
 channel.description("666")
 channel.author("HanTools")
 
-sl1 = ["6", "9", "6的", "9（6翻了）", "⑥", "₆", "⑹", "⒍", "⁶", "Six", "Nine", "\u0039\ufe0f\u20e3",
-       "\u0036\ufe0f\u20e3", "♸", "liu", "⑨", "陆", "玖","l!u"]  # 模糊匹配
-sl2 = ["1+5", "2+4", "3+3", "4+2", "5+1", "2x3", "3x2", "0b110", "0B110", "0O6", "最小的完整数","/echo 6"]  # 精确匹配
+sl1 = ["6", "9", "6的", "9（6翻了）", "⑥", "₆", "⑹", "⒍", "⁶", "six", "nine", "\u0039\ufe0f\u20e3",
+       "\u0036\ufe0f\u20e3", "♸", "𝟼", "𝟞", "liù", "liu", '⑨']  # 模糊匹配
+sl2 = []  # 精确匹配
 jieba.load_userdict('./jieba_words.txt')
 
 
-async def divided(a, b):
-    a1 = jieba.cut(a)
-    b1 = jieba.cut(b)
-    lst_a = []
-    lst_b = []
-    for i in a1:
-        lst_a.append(i)
-    for j in b1:
-        lst_b.append(j)
-    return lst_a, lst_b
+async def divided(a: str, b: str):
+    return jieba.lcut(a), jieba.lcut(b)
 
 
 # 获取所有的分词可能
-async def get_all_words(lst_aa, lst_bb):
-    all_word = []
-    for ix in lst_aa:
-        if ix not in all_word:
-            all_word.append(ix)
-    for j in lst_bb:
-        if j not in all_word:
-            all_word.append(j)
-    return all_word
+async def get_all_words(lst_aa: list, lst_bb: list):
+    return list(set(lst_aa + lst_bb))
 
 
 # 词频向量化
@@ -97,17 +81,16 @@ async def f_hide_mid(string, count=4, fix='*'):
                     ret_str = string[:int(str_len / 2 - count / 2)] + count * fix + string[
                                                                                     int(str_len / 2 + count / 2):]
                 else:
-                    ret_str = string[:int((str_len + 1) / 2 - count / 2)] + count * fix + string[int((
-                                                                                                             str_len + 1) / 2 + count / 2):]
+                    ret_str = string[:int((str_len + 1) / 2 - count / 2)] + count * fix + string[int((str_len + 1)
+                                                                                                     / 2 + count / 2):]
             else:
                 if str_len % 2 == 0:
                     ret_str = string[:int(str_len / 2 - (count - 1) / 2)] + count * fix + string[int(str_len / 2 + (
                             count + 1) / 2):]
                 else:
                     ret_str = string[:int((str_len + 1) / 2 - (count + 1) / 2)] + count * fix + string[
-                                                                                                int((
-                                                                                                            str_len + 1) / 2 + (
-                                                                                                            count - 1) / 2):]
+                                                                                                int((str_len + 1) / 2 +
+                                                                                                    (count - 1) / 2):]
         else:
             ret_str = string[0] + fix * (str_len - 2) + string[-1]
     return ret_str
@@ -115,18 +98,15 @@ async def f_hide_mid(string, count=4, fix='*'):
 
 async def text_pretreatment(s):
     s = s.replace('六', '6').replace('九', '9').replace('陆', '6').replace('玖', '9') \
-        .replace('(', '（').replace(')', '）')
-    replace_words = [
-        (r"6+", "6"),
-        (r"9+", "9"),
-        (r"（+", "（"),
-        (r"）+", "）")
-    ]
-    stop_words = " ，,。.!！？?…^"
+        .replace('(', '（').replace(')', '）').lstrip("/echo ").lower()
+    stop_words = " ，,。.!！？?…^\n"
     for stop in stop_words:
         s = s.replace(stop, '')
-    for regex in replace_words:
-        s = re.compile(regex[0]).sub(regex[1], s)
+    replace_words = [
+        "（", "）"
+    ]
+    for regex in sl1 + sl2 + replace_words:
+        s = re.compile(f"({regex})+").sub(regex, s)
     return s
 
 
@@ -134,7 +114,7 @@ async def index_lst(x, lst):
     lst = sorted(lst, reverse=True, key=lambda n: n[1])
     flag = len(lst) - 1
     for i in range(len(lst)):
-        if x > lst[i][1]:
+        if x >= lst[i][1]:
             flag = i
             break
     msg = []
@@ -152,7 +132,12 @@ async def selectivity_hide(lst):
     return msg
 
 
-@listen(GroupMessage)
+@channel.use(
+    ListenerSchema(
+        listening_events=[GroupMessage],
+        decorators=[depen.match_text()]
+    )
+)
 async def six_six_six(app: Ariadne, group: Group, event: GroupMessage, message: MessageChain):
     data = await botfunc.select_fetchone("""SELECT uid, count, ti FROM six WHERE uid = %s""", event.sender.id)
     if data is not None and int(time.time()) - data[2] < 10:
@@ -180,7 +165,7 @@ async def six_six_six(app: Ariadne, group: Group, event: GroupMessage, message: 
         s1_ = await text_pretreatment(s1)
         # 对比
         list_a, list_b = await divided(s1_, s2_)
-        all_words = await get_all_words(tuple(list_a), tuple(list_b))
+        all_words = await get_all_words(list_a, list_b)
         laa, lbb = await get_word_vector(tuple(list_a), tuple(list_b), tuple(all_words))
         cos = await calculate_cos(tuple(laa), tuple(lbb))
         cos = round(cos, 2)
@@ -202,8 +187,14 @@ async def six_six_six(app: Ariadne, group: Group, event: GroupMessage, message: 
             break
 
 
-@listen(GroupMessage)
-@decorate(MatchContent("6榜"))
+@channel.use(
+    ListenerSchema(
+        listening_events=[GroupMessage],
+        decorators=[
+            MatchContent("6榜")
+        ]
+    )
+)
 async def six_top(app: Ariadne, group: Group, event: GroupMessage):
     data = await botfunc.select_fetchall("SELECT uid, count FROM six ORDER BY count DESC LIMIT 21")
     try:
@@ -216,12 +207,16 @@ async def six_top(app: Ariadne, group: Group, event: GroupMessage):
                                      quote=event.source)
 
 
-@listen(GroupMessage)
-@decorate(MatchContent("6，闭个嘴"))
+@channel.use(
+    ListenerSchema(
+        listening_events=[GroupMessage],
+        decorators=[
+            MatchContent("6，闭嘴"),
+            depen.check_authority_op()
+        ]
+    )
+)
 async def no_six(app: Ariadne, group: Group, event: GroupMessage):
-    admins = await botfunc.get_all_admin()
-    if event.sender.id not in admins:
-        return
     if group.id not in cache_var.no_6:
         cache_var.no_6.append(group.id)
         await botfunc.run_sql("""INSERT INTO no_six VALUES (%s)""", (group.id,))
@@ -230,19 +225,23 @@ async def no_six(app: Ariadne, group: Group, event: GroupMessage):
             MessageChain(
                 [
                     At(event.sender.id),
-                    Plain(" 好啊，很好啊。你品，你细品")
+                    Plain(" 好啊，很好啊")
                 ]
             ),
             quote=event.source
         )
 
 
-@listen(GroupMessage)
-@decorate(MatchContent("6，张个嘴"))
+@channel.use(
+    ListenerSchema(
+        listening_events=[GroupMessage],
+        decorators=[
+            MatchContent("6，张嘴"),
+            depen.check_authority_op()
+        ]
+    )
+)
 async def yes_six(app: Ariadne, group: Group, event: GroupMessage):
-    admins = await botfunc.get_all_admin()
-    if event.sender.id not in admins:
-        return
     if group.id in cache_var.no_6:
         cache_var.no_6.remove(group.id)
         await botfunc.run_sql("""DELETE FROM no_six WHERE gid = %s""", (group.id,))
@@ -251,7 +250,7 @@ async def yes_six(app: Ariadne, group: Group, event: GroupMessage):
             MessageChain(
                 [
                     At(event.sender.id),
-                    Plain(" 好啊，很好啊。你品，你细品")
+                    Plain(" 好啊，很好啊")
                 ]
             ),
             quote=event.source
