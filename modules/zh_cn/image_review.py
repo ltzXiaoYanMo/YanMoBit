@@ -26,7 +26,7 @@ channel.author("HanTools")
 dyn_config = 'dynamic_config.yaml'
 
 
-async def using_tencent_cloud(content: str, user_id) -> dict:
+async def using_tencent_cloud(content: str, user_id: str) -> dict:
     if botfunc.r.hexists("imgsafe", hashlib.sha384(content.encode()).hexdigest()):
         return json.loads(botfunc.r.hget("imgsafe", hashlib.sha384(content.encode()).hexdigest()))
     try:
@@ -34,20 +34,19 @@ async def using_tencent_cloud(content: str, user_id) -> dict:
             botfunc.get_cloud_config("QCloud_Secret_id"),
             botfunc.get_cloud_config("QCloud_Secret_key")
         )
-        client = ims_client.ImsClient(cred, botfunc.get_config("Region"))
+        client = ims_client.ImsClient(cred, "ap-guangzhou")
         req = models.ImageModerationRequest()
         params = {
             "FileContent": content,  # base64
             "User": {
                 "UserId": user_id,
-                "AccountType": 2
+                "AccountType": "2"
             }
         }
         req.from_json_string(json.dumps(params))
         resp = client.ImageModeration(req)
-        logger.info(resp.to_json_string())
         botfunc.r.hset(
-            'sw', hashlib.sha384(content.encode()).hexdigest(),
+            'imgsafe', hashlib.sha384(content.encode()).hexdigest(),
             json.dumps(
                 {
                     "Suggestion": resp.Suggestion,
@@ -56,6 +55,7 @@ async def using_tencent_cloud(content: str, user_id) -> dict:
                 }
             )
         )
+        logger.debug(f"新图片入库！{resp.Suggestion} | {resp.SubLabel} | {resp.DataId}")
         return {
             "Suggestion": resp.Suggestion,
             "SubLabel": resp.SubLabel,
@@ -74,16 +74,16 @@ async def using_tencent_cloud(content: str, user_id) -> dict:
     ListenerSchema(
         listening_events=[GroupMessage],
         decorators=[
-            MatchContent("图片审核，启动！"),
+            MatchContent("启动图片审核"),
             depen.check_authority_op()
         ]
     )
 )
-async def start_word(app: Ariadne, group: Group, event: GroupMessage):
+async def start_review(app: Ariadne, group: Group, event: GroupMessage):
     with open(dyn_config, 'r') as cf:
         cfy = yaml.safe_load(cf)
     cfy['img'].append(group.id)
-    cfy['img'] = list(set(cfy["word"]))
+    cfy['img'] = list(set(cfy["img"]))
     with open(dyn_config, 'w') as cf:
         yaml.dump(cfy, cf)
     await app.send_message(group, MessageChain([At(event.sender.id), Plain(" OK辣！")]))
@@ -93,12 +93,12 @@ async def start_word(app: Ariadne, group: Group, event: GroupMessage):
     ListenerSchema(
         listening_events=[GroupMessage],
         decorators=[
-            MatchContent("图片审核，卸载！"),
+            MatchContent("关闭图片审核"),
             depen.check_authority_op()
         ]
     )
 )
-async def stop_word(app: Ariadne, group: Group, event: GroupMessage):
+async def stop_review(app: Ariadne, group: Group, event: GroupMessage):
     with open(dyn_config, 'r') as cf:
         cfy = yaml.safe_load(cf)
     try:
@@ -118,9 +118,11 @@ async def stop_word(app: Ariadne, group: Group, event: GroupMessage):
     )
 )
 async def image_review(app: Ariadne, message: MessageChain, event: GroupMessage):
-    if event.sender.id in botfunc.get_dyn_config("img"):
+    if event.sender.group.id in botfunc.get_dyn_config("img"):
         for i in message[Image]:
-            result = await using_tencent_cloud(base64.b64encode(i.get_bytes()).decode(), event.sender.id)
+            data = await i.get_bytes()
+            result = await using_tencent_cloud(base64.b64encode(data).decode(), str(event.sender.id))
+            logger.debug(result)
             if result['Suggestion'] == "Block":
                 await app.recall_message(event.source, event.sender.group)
                 await app.send_message(
