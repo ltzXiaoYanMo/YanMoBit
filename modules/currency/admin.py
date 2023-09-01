@@ -19,32 +19,32 @@ channel.author("HanTools")
     ListenerSchema(
         listening_events=[GroupMessage],
         decorators=[
-            DetectPrefix("上管"),
+            DetectPrefix("添加管理"),
             depen.check_authority_op(),
             depen.check_authority_not_black()
         ]
     )
 )
-async def add_admin(app: Ariadne, group: Group, message: MessageChain = DetectPrefix("上管")):
+async def add_admin(app: Ariadne, group: Group, message: MessageChain = DetectPrefix("添加管理")):
     try:
-        await botfunc.run_sql("INSERT INTO admin(uid) VALUES (%s)", (int(str(message).lstrip("上管")),))
+        await botfunc.run_sql("INSERT INTO admin(uid) VALUES (%s)", (int(str(message).lstrip("添加管理")),))
     except Exception as err:
         await app.send_message(group, f"寄！{err}")
     else:
-        await app.send_message(group, "OK!")
+        await app.send_message(group, "已经成功添加到数据库！若你需要进一步了解Bot")
 
 
 @channel.use(
     ListenerSchema(
         listening_events=[GroupMessage],
         decorators=[
-            DetectPrefix("下管"),
+            DetectPrefix("删除管理"),
             depen.check_authority_op(),
             depen.check_authority_not_black()
         ]
     )
 )
-async def del_admin(app: Ariadne, group: Group, event: GroupMessage, message: MessageChain = DetectPrefix("下管")):
+async def del_admin(app: Ariadne, group: Group, event: GroupMessage, message: MessageChain = DetectPrefix("删除管理")):
     admins = await botfunc.get_all_admin()
     if event.sender.id not in admins:
         return

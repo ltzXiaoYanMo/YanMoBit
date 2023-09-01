@@ -39,7 +39,7 @@ def safe_file_write(filename: str, s, mode: str = "w", encode: str = "UTF-8"):
 
 
 loop = asyncio.get_event_loop()
-config_yaml = yaml.safe_load(open('config.yaml', 'r', encoding='UTF-8'))
+config_yaml = yaml.safe_load(open('../YanBot_KHB_Edition/config.yaml', 'r', encoding='UTF-8'))
 try:
     cloud_config_json = json.load(open('cloud.json', 'r', encoding='UTF-8'))
 except FileNotFoundError:

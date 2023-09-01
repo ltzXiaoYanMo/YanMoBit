@@ -39,7 +39,8 @@ async def saucenao(app: Ariadne, group: Group, message: MessageChain, event: Gro
             message=MessageChain([
                 Plain(
                     "数据来源：https://saucenao.com/\n"
-                    "没搜有到你想要的图片、搜出 r18 内容、你打开时被某张图片吓到等场景，我不负责"
+                    "没搜有到你想要的图片、搜出 r18 内容、你打开时被某张图片吓到等场景，我不负责\n"
+                    "宇宙免责申明（确信）"
                 )
             ]),
             name="宇宙免责声明"
