@@ -68,6 +68,15 @@ word:
 img:
 - null""")
     logger.warning('dynamic_config.yaml 已被程序自动创建')
+try:
+    cloud_config_json = json.load(open('cloud.json', 'r', encoding='UTF-8'))
+except FileNotFoundError:
+    safe_file_write('openai.json', """{
+  url:
+  key:
+}""")
+    logger.warning(
+        'OpenAI.json 已经被程序自动创建')
 
 
 def get_config(name: str):

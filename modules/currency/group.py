@@ -2,15 +2,12 @@ from graia.ariadne.app import Ariadne
 from graia.ariadne.event.mirai import MemberJoinRequestEvent, \
     MemberCardChangeEvent, GroupRecallEvent, MemberLeaveEventKick, MemberLeaveEventQuit, MemberJoinEvent
 from graia.ariadne.message.chain import MessageChain
-from graia.ariadne.message.element import At, Plain
-from graia.ariadne.model import Group, MemberPerm
+from graia.ariadne.model import Group
 from graia.saya import Channel
 from graia.saya.builtins.broadcast import ListenerSchema
 from graia.ariadne.message.element import Plain, At, Image
 
 import globalvars
-import os
-import random
 
 channel = Channel.current()
 channel.name("检测群聊")
