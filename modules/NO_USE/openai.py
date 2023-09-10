@@ -29,7 +29,7 @@ openai.api_base = json.loads(pathlib.Path("./openai.json").read_text())
 async def chatgpt(app: Ariadne, group: Group, event: GroupMessage):
     await app.send_message(
         group,
-        MessageChain([At(event.sender.id), Plain(f"openai.content")]),
+        MessageChain([At(event.sender.id), Plain(json.loads(res)["choices"][0]["message"]["content"])]),
     )
 
 # 收到api和key，向api服务器发送请求
