@@ -26,11 +26,22 @@ channel = Channel.current()
 
 @channel.use(ListenerSchema(listening_events=[NudgeEvent]))
 async def nudge(app: Ariadne, event: NudgeEvent):
-    # 只检测被戳的是不是本机器人
+    # 群聊
     print(event.target)
     if event.target == globalvars.bot_qq and event.context_type == "group":
             await app.send_group_message(
                 event.group_id,
                 MessageChain(MessageChain(
                     [At(event.supplicant), Plain(" 这个沙冰吃柠檬，柠檬大冰人人吃，左吃吃tm右吃吃，吃得柠檬冰开化")]))
+            )
+
+@channel.use(ListenerSchema(listening_events=[NudgeEvent]))
+async def nudge(app: Ariadne, event: NudgeEvent):
+    # 私聊
+    print(event.target)
+    if event.target == globalvars.bot_qq and event.context_type == "Friend":
+            await app.send_group_message(
+                event.group_id,
+                MessageChain(MessageChain(
+                    [At(event.supplicant), Plain(" 艾斯比，找我干嘛？")]))
             )
