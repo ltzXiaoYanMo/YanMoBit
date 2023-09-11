@@ -155,6 +155,8 @@ with saya.module_context():
                 continue
             if module[1] == 'NO_USE':
                 continue
+            if module[1] == 'Beta_Channel':
+                continue
             module = '.'.join(module)[:-3]
             logger.info(f'{module} 将被载入')
             saya.require(module)

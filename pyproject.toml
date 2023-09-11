@@ -31,6 +31,7 @@ dependencies = [
     "rich>=13.4.2",
     "tencentcloud-sdk-python-tms>=3.0.967",
     "tencentcloud-sdk-python-ims>=3.0.967",
+    "pathlib>=1.0.1",
 ]
 requires-python = ">=3.10,<4.0"
 license = { text = "AGPL-3.0" }
