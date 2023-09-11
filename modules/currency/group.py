@@ -5,7 +5,7 @@ from graia.ariadne.message.chain import MessageChain
 from graia.ariadne.model import Group
 from graia.saya import Channel
 from graia.saya.builtins.broadcast import ListenerSchema
-from graia.ariadne.message.element import Plain, At, Image
+from graia.ariadne.message.element import Plain, At
 
 import globalvars
 
