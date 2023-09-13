@@ -21,9 +21,9 @@ channel.description("为群友们提供ChatGPT服务")
 channel.author("ltzXiaoYanMo")
 
 # 此处调用openai.json中的key中的key
-openai.api_key = json.loads(pathlib.Path("./openai.json").read_text())
+openai.api_key = json.loads(pathlib.Path("./openai.json").read_text("key"))
 # 此处调用openai.json中的url中的api链接
-openai.api_base = json.loads(pathlib.Path("./openai.json").read_text())
+openai.api_base = json.loads(pathlib.Path("./openai.json").read_text("url"))
 
 # 赋值
 MessageChat = input(MessageChain)
