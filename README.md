@@ -13,7 +13,9 @@
 
 最后感谢[括弧](https://github.com/daizihan233/)对Bot的支持！也同时感谢[Emerald-AM9](https://github.com/Emerald-AM9)对于代码错误的指正！
 
-如果确实想使用，请查看[使用手册](https://github.com/ltzXiaoYanMo/YanBot_KHB_Edition/blob/main/starting.md)
+如果确实想使用，请查看[使用手册](https://github.com/ltzXiaoYanMo/YanBot_KHB_Edition/blob/main/starting.md)，或[官方文档](https://bot.ymbot.top)
+
+若你是懒狗，可以使用[自动安装](https://github.com/ltzXiaoYanMo/YanBot_KHB_Edition_autorun)
 
 在最近的一次更新，已经引入[2kbit-py](https://github.com/Abjust/2kbit-py)的部分代码，虽然已经停止更新，但不代表我们不更新啊（雾）
 
