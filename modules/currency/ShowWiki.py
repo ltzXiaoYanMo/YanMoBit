@@ -10,6 +10,7 @@ channel.name("ShowWiki")
 channel.description("傻鸟，不会用看这里")
 channel.author("ltzXiaoYanMo")
 
+
 @channel.use(
     ListenerSchema(
         listening_events=[GroupMessage],
