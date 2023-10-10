@@ -39,7 +39,27 @@ def safe_file_write(filename: str, s, mode: str = "w", encode: str = "UTF-8"):
 
 
 loop = asyncio.get_event_loop()
-config_yaml = yaml.safe_load(open('../YanBot_KHB_Edition/config.yaml', 'r', encoding='UTF-8'))
+try:
+    config_yaml = yaml.load(open('config.yaml', 'r', encoding='UTF-8'), Loader=yaml.FullLoader)
+except FileNotFoundError:
+    safe_file_write('config_yaml', """
+    qq: 114514  # 运行时登录的 QQ 号
+    verifyKey: "GraiaXVerifyKey"  # MAH 的 verifyKey
+    recall: 5  # 涩图撤回等待时长（单位：秒）
+    # 如果你没有那么多涩图API可以填一样的URL
+    setu_api: "https://api.jiecs.top/lolicon?r18=2"  # 涩图 API
+    setu_api2: "https://www.acy.moe/api/r18"   # 涩图 API 2
+    setu_api2_probability: 5 # 表示【涩图 API 2】的被调用的概率为 1/n
+    NewFriendRequestEvent: true  # 是否自动通过好友添加：true -> 自动通过 | false -> 自动拒绝  
+    BotInvitedJoinGroupRequestEvent: true  # 是否自动通过加群邀请：同上
+    mirai_api_http: "http://localhost:8080"  # 连接到 MAH 的地址
+    count_ban: 4  # 木鱼调用频率限制
+    # 注意：腾讯云内容安全 API 收费为 0.0025/条
+    text_review: false  # 是否使用腾讯云内容安全 API 对文本内容进行审核：true -> 是 | false -> 否，使用本地敏感词库
+    # 请参考此文章就近设置地域：https://cloud.tencent.com/document/api/1124/51864#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8
+    Region: ap-hongkong  # 使用香港地区 API
+    enable_mysql: false  # 是否使用MySQL存储数据
+    """)
 try:
     cloud_config_json = json.load(open('cloud.json', 'r', encoding='UTF-8'))
 except FileNotFoundError:
