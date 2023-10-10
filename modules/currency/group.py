@@ -74,5 +74,5 @@ async def quit_detect(app: Ariadne, event: MemberLeaveEventQuit, group: Group):
 async def join_detect(app: Ariadne, event: MemberJoinEvent, group: Group):
     await app.send_message(
         group,
-        MessageChain(At(event.member.id), Plain(" 来辣！本Bot官方文档https://bot.ymbot.top")),
+        MessageChain(At(event.member.id), Plain(" 来辣！")),
     )

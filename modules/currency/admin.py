@@ -31,7 +31,7 @@ async def add_admin(app: Ariadne, group: Group, message: MessageChain = DetectPr
     except Exception as err:
         await app.send_message(group, f"寄！{err}")
     else:
-        await app.send_message(group, "已经成功添加到数据库！若你需要进一步了解Bot")
+        await app.send_message(group, "已经成功添加到数据库！")
 
 
 @channel.use(
