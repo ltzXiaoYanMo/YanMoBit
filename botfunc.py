@@ -59,10 +59,13 @@ except FileNotFoundError:
     # 请参考此文章就近设置地域：https://cloud.tencent.com/document/api/1124/51864#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8
     Region: ap-hongkong  # 使用香港地区 API
     enable_mysql: false  # 是否使用MySQL存储数据
+    oneword: https://v1.hitokoto.cn/?c=f&encode=text # 一言api
     """)
     logger.error(
         'config.yaml 文件不存在，已生成默认配置文件，请修改后重新运行。'
     )
+    sys.exit(1)
+
 try:
     cloud_config_json = json.load(open('cloud.json', 'r', encoding='UTF-8'))
 except FileNotFoundError:
@@ -92,7 +95,7 @@ img:
 - null""")
     logger.warning('dynamic_config.yaml 已被程序自动创建')
 try:
-    cloud_config_json = json.load(open('cloud.json', 'r', encoding='UTF-8'))
+    cloud_config_json = json.load(open('openai.json', 'r', encoding='UTF-8'))
 except FileNotFoundError:
     safe_file_write('openai.json', """{
   url:
@@ -191,7 +194,6 @@ async def get_all_sb() -> list:
     for i in tmp:
         t.append(i[0])
     return t
-
 
 if get_cloud_config("Redis_Pwd") is not None:
     backend = requests_cache.RedisCache(
