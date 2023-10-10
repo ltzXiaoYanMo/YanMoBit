@@ -20,6 +20,7 @@ from rich.progress import track
 
 import botfunc
 import cache_var
+# 查看config.yaml中的enable_mysql是否为开启，若开启则使用MySQL，若不是则使用SQLite
 
 saya = create(Saya)
 app = Ariadne(

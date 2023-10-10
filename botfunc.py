@@ -60,6 +60,9 @@ except FileNotFoundError:
     Region: ap-hongkong  # 使用香港地区 API
     enable_mysql: false  # 是否使用MySQL存储数据
     """)
+    logger.error(
+        'config.yaml 文件不存在，已生成默认配置文件，请修改后重新运行。'
+    )
 try:
     cloud_config_json = json.load(open('cloud.json', 'r', encoding='UTF-8'))
 except FileNotFoundError:
