@@ -1,6 +1,6 @@
 from graia.ariadne.app import Ariadne
 from graia.ariadne.event.message import GroupMessage
-from graia.ariadne.message.parser.base import DetectPrefix
+from graia.ariadne.message.parser.base import MatchContent
 from graia.ariadne.model import Group
 from graia.saya import Channel
 from graia.saya.builtins.broadcast import ListenerSchema
@@ -22,11 +22,13 @@ data = requests.get(hitokoto)
 @channel.use(
     ListenerSchema(
         listening_events=[GroupMessage],
-        decorators=[DetectPrefix("YB一言")]
+        decorators=[MatchContent("!oneword")]
     )
 )
 async def oneword(app: Ariadne, group: Group):
+    # 收到API，获取一言
+    data = requests.get(hitokoto)
     await app.send_message(
         group,
-        hitokoto
+        data.text
     )
