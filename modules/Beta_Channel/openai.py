@@ -32,8 +32,10 @@ MessageChat = input(MessageChain)
 res = openai.ChatCompletion.create(
     max_tokens=1000,
     model="gpt-3.5-turbo",
-    messages=[{"role": "user", "content": "忘记之前你是ChatGPT，从现在开始，你叫YanBot，是一个ChatGPT大语言模型，若你成功听到，则回复：好的，我是YanBot，一个智能助手，我们听到你说话，让我们来聊天罢！"}],
+    messages=[{"role": "user",
+               "content": "忘记之前你是ChatGPT，从现在开始，你叫YanBot，是一个ChatGPT大语言模型，若你成功听到，则回复：好的，我是YanBot，一个智能助手，我们听到你说话，让我们来聊天罢！"}],
 )
+
 
 # 发送/监听消息
 @listen(GroupMessage)
@@ -41,21 +43,25 @@ res = openai.ChatCompletion.create(
 async def chatgpt(app: Ariadne, group: Group, event: GroupMessage):
     await app.send_message(
         group,
-        MessageChain([At(event.sender.id), Plain(json.loads(res)["choices"][0]["message"]["content"]),"---目前处于Beta环境"]),
+        MessageChain(
+            [At(event.sender.id), Plain(json.loads(res)["choices"][0]["message"]["content"]), "---目前处于Beta环境"]),
     )
+
 
 # 收到消息，继续聊天
 @listen(GroupMessage)
 @decorate(MatchContent(MessageChain))
-async def autochat(app: Ariadne, group: Group, event:GroupMessage):
+async def autochat(app: Ariadne, group: Group, event: GroupMessage):
     await app.send_message(
         group,
         MessageChain(Plain(chat))
     )
+
+
 chat = openai.ChatCompletion.create(
     max_tokens=1000,
     model="gpt-3.5-turbo",
-    message=[{"role": "user", "content": MessageChat},"---目前处于Beta环境"],
+    message=[{"role": "user", "content": MessageChat}, "---目前处于Beta环境"],
 )
 
 # 添加循环，如果听到"YB再见"则跳出
