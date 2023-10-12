@@ -17,6 +17,8 @@
 
 若你是懒狗，可以使用[自动安装](https://github.com/ltzXiaoYanMo/YanBot_KHB_Edition_autorun)
 
+同时感谢[JetBrains](https://jetbrains.com)对于开源社区的支持！
+
 在最近的一次更新，已经引入[2kbit-py](https://github.com/Abjust/2kbit-py)的部分代码，虽然已经停止更新，但不代表我们不更新啊（雾）
 
 在2023/8/26日时，项目的Bot遭tx封禁，且在中国地区已经上学，暂且无法更新。
