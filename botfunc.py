@@ -78,6 +78,7 @@ except FileNotFoundError:
   "MySQL_User": "root",
   "Redis_Host": "localhost",
   "Redis_port": 6379,
+  "Redis_Pwd": "",
   "snao_key": ""
 }""")
     logger.error(
