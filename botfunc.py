@@ -98,8 +98,8 @@ try:
     cloud_config_json = json.load(open('openai.json', 'r', encoding='UTF-8'))
 except FileNotFoundError:
     safe_file_write('openai.json', """{
-  url:
-  key:
+  url: ""
+  key: ""
 }""")
     logger.warning(
         'OpenAI.json 已经被程序自动创建')
