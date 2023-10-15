@@ -3,7 +3,7 @@ import openai
 say = input('say:')
 
 # apikey
-openai.api_key = "AIGC10241-EpfPi81JulQLPixe0jyWTVHexOSl59"
+openai.api_key = "xxxxxxxxxxxxxxxxxx"
 
 # api-url
 openai.api_base = "https://api.aigc2d.com/v1"
