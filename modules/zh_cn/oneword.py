@@ -16,9 +16,6 @@ channel.author("ltzXiaoYanMo")
 # 获取api
 hitokoto = botfunc.get_config('oneword')
 
-# 收到API，获取一言
-oneword = requests.get(hitokoto)
-
 
 @channel.use(
     ListenerSchema(
@@ -28,8 +25,8 @@ oneword = requests.get(hitokoto)
 )
 async def oneword(app: Ariadne, group: Group):
     # 收到API，获取一言
-    oneword = requests.get(hitokoto)
+    onewords = requests.get(hitokoto)
     await app.send_message(
         group,
-        oneword.text
+        onewords.text
     )
