@@ -9,7 +9,7 @@ from graia.ariadne.message.parser.base import MatchContent
 from graia.ariadne.model import Group
 from graia.ariadne.util.saya import listen, decorate
 from graia.saya import Channel
-from graia.ariadne.message.element import At, Plain, listen
+from graia.ariadne.message.element import At, Plain
 
 import openai
 import json
@@ -25,10 +25,9 @@ openai.api_key = json.loads(pathlib.Path("./openai.json").read_text("key"))
 # 此处调用openai.json中的url中的api链接
 openai.api_base = json.loads(pathlib.Path("./openai.json").read_text("url"))
 
-# 赋值
-MessageChat = input(MessageChain)
-
 # 收到api和key，向api服务器发送请求
+
+
 res = openai.ChatCompletion.create(
     max_tokens=1000,
     model="gpt-3.5-turbo",
@@ -50,11 +49,11 @@ async def chatgpt(app: Ariadne, group: Group, event: GroupMessage):
 
 # 收到消息，继续聊天
 @listen(GroupMessage)
-@decorate(MatchContent(MessageChain))
-async def autochat(app: Ariadne, group: Group, event: GroupMessage):
+@decorate(MatchContent(""))
+async def autochat(app: Ariadne, group: Group):
     await app.send_message(
         group,
-        MessageChain(Plain(chat))
+
     )
 
 
