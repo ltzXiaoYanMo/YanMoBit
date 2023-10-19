@@ -10,24 +10,23 @@ from graia.ariadne.model import Group
 from graia.ariadne.util.saya import listen, decorate
 from graia.saya import Channel
 from graia.ariadne.message.element import At, Plain
+from graia.saya.builtins.broadcast import ListenerSchema
 
 import openai
+import botfunc
 import json
-import pathlib
 
 channel = Channel.current()
 channel.name("OpenAI")
 channel.description("为群友们提供ChatGPT服务")
 channel.author("ltzXiaoYanMo")
 
-# 此处调用openai.json中的key中的key
-openai.api_key = json.loads(pathlib.Path("./openai.json").read_text("key"))
-# 此处调用openai.json中的url中的api链接
-openai.api_base = json.loads(pathlib.Path("./openai.json").read_text("url"))
+# 此处调用cloud.json中的openai_apikey
+openai.api_key = botfunc.get_cloud_config('openai_apikey')
+# 此处调用cloud.json中的api
+openai.api_base = botfunc.get_cloud_config('openai_api')
 
 # 收到api和key，向api服务器发送请求
-
-
 res = openai.ChatCompletion.create(
     max_tokens=1000,
     model="gpt-3.5-turbo",
@@ -63,7 +62,18 @@ chat = openai.ChatCompletion.create(
     message=[{"role": "user", "content": MessageChat}, "---目前处于Beta环境"],
 )
 
+# ？
+@channel.use(
+    ListenerSchema(
+        listening_events=[GroupMessage],
+        decorators=[MatchContent("傻逼来聊天")]
+    )
+)
+async def get_bread(app: Ariadne, group: Group, event: GroupMessage):
+    await app.send_group_message(group, "我草你吗", quote=event.source)
+
 # 添加循环，如果听到"YB再见"则跳出
+@listen(ListenGroup)
 for i in range(len(chat)):
     if listen(MessageChain("YB再见")):
         break
