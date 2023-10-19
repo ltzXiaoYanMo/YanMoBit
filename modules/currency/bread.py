@@ -126,4 +126,4 @@ async def setu(app: Ariadne, group: Group):
     )
 )
 async def get_bread(app: Ariadne, group: Group, event: GroupMessage):
-    await app.send_group_message(group, "啊？", quote=event.source)
+    await app.send_group_message(group, "草你吗，我没有，找KuoHuBit去（", quote=event.source)
