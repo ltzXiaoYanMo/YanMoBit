@@ -1,10 +1,10 @@
-# Build and Release Folders
+# 构建和发布文件夹
 bin-debug/
 bin-release/
 [Oo]bj/
 [Bb]in/
 
-# Other files and folders
+# 其他文件和文件夹
 .settings/
 
 # Executables
@@ -13,6 +13,6 @@ bin-release/
 *.ipa
 *.apk
 
-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-# should NOT be excluded as they contain compiler settings and other important
-# information for Eclipse / Flash Builder.
+# 项目文件，即 `.project`、`.actionScriptProperties` 和 `.flexProperties`
+# 不应被排除，因为它们包含编译器设置和其他重要内容
+# Eclipse/Flash Builder 的信息。
