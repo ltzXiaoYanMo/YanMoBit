@@ -47,7 +47,7 @@ Linux：
 ```bash
 python3 get-pip.py 或 pip3.11 get-pip.py
 ```
-安装完毕后，进入YanBot的目录，输入pdm install（数据支持来自Bugji，也就是括弧）<del>里面的numba和支持库因源已停止更新</del>在最新版中已经完全支持Python3.11，且无需安装也能正常使用。所以打“X”也无需慌张。此刻你已经安装完毕了依赖。（若你未处于中国大陆，在使用pip安装完pdm之后，输入pdm config pypi.url https://pypi.org/simple来更换原版pip源）
+安装完毕后，进入YanBot的目录，输入pdm install（数据支持来自Bugji，也就是括弧）<del>里面的numba和支持库因源已停止更新</del>在最新版中已经完全支持Python3.11，且无需安装也能正常使用。所以打“X”也无需慌张。此刻你已经安装完毕了依赖。（若你未处于中国大陆，在使用pip安装完pdm之后，输入 **pdm config pypi.url https://pypi.org/simple** 来更换原版pip源）
 
 ## 安装QQBot支持-Mirai Console Loader
 
