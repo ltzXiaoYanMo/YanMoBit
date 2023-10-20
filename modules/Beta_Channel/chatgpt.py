@@ -52,7 +52,7 @@ async def chatgpt(app: Ariadne, group: Group, event: GroupMessage):
 async def autochat(app: Ariadne, group: Group):
     await app.send_message(
         group,
-
+    chat
     )
 
 
@@ -73,7 +73,7 @@ async def get_bread(app: Ariadne, group: Group, event: GroupMessage):
     await app.send_group_message(group, "我草你吗", quote=event.source)
 
 # 添加循环，如果听到"YB再见"则跳出
-@listen(ListenGroup)
+@listen(GroupMessage)
+@decorate(MatchContent("YB再见"))
 for i in range(len(chat)):
-    if listen(MessageChain("YB再见")):
-        break
+            break
