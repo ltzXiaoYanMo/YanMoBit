@@ -16,6 +16,7 @@
 ```
 
 这是cloud.json的配置文件，我们目前仅需要填写MySQL Redis设置即可
+
 MySQL:
     
 MySQL_Pwd:数据库的密码
