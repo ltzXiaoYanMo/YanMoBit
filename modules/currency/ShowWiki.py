@@ -14,7 +14,7 @@ channel.author("ltzXiaoYanMo")
 @channel.use(
     ListenerSchema(
         listening_events=[GroupMessage],
-        decorators=[DetectPrefix("YBwiki")]
+        decorators=[DetectPrefix("!wiki")]
     )
 )
 async def wiki(app: Ariadne, group: Group):

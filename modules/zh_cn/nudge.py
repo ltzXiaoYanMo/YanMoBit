@@ -26,6 +26,7 @@ channel.author("ltzXiaoYanMo")
 saya = Saya.current()
 channel = Channel.current()
 
+# api地址
 api_list = [
     botfunc.get_config('zuan_api'),
     botfunc.get_config('zuan_api2')
@@ -34,11 +35,11 @@ api_list = [
 
 @channel.use(ListenerSchema(listening_events=[NudgeEvent]))
 async def nudge(app: Ariadne, event: NudgeEvent):
-    # 群聊
-    print(event.target)
-    if event.target == globalvars.bot_qq and event.context_type == "group":
+    # 只检测被戳的是不是机器人
+    if event.target == globalvars.botqq:
+        data = requests.get(random.choice(api_list),
+                            headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64))"})
         await app.send_group_message(
-            event.group_id,
-            MessageChain(MessageChain(
-                [At(event.supplicant), Plain(" "), requests.get(random.choice(api_list))]))
+            event.subject,
+            MessageChain([At(event.supplicant), Plain(f" {data.text.strip()}")])
         )
