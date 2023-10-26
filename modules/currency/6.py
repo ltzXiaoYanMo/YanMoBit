@@ -1,10 +1,4 @@
-import os
-import random
-import re
-import time
-
-import jieba
-import numpy
+from numpy import average, array, sqrt, dot
 from graia.amnesia.message import MessageChain
 from graia.ariadne.app import Ariadne
 from graia.ariadne.event.message import GroupMessage
@@ -14,9 +8,14 @@ from graia.ariadne.model import Group
 from graia.saya import Channel
 from graia.saya.builtins.broadcast import ListenerSchema
 
+import os
+import random
+import re
+import time
 import botfunc
 import cache_var
 import depen
+import jieba
 
 channel = Channel.current()
 channel.name("6榜")
@@ -50,9 +49,9 @@ async def get_word_vector(lst_aaa, lst_bbb, all_word):
 
 # 计算余弦值，利用了numpy中的线代计算方法
 async def calculate_cos(la, lb):
-    laaa = numpy.array(la)
-    lbbb = numpy.array(lb)
-    coss = (numpy.dot(laaa, lbbb.T)) / ((numpy.sqrt(numpy.dot(laaa, laaa.T))) * (numpy.sqrt(numpy.dot(lbbb, lbbb.T))))
+    laaa = array(la)
+    lbbb = array(lb)
+    coss = (dot(laaa, lbbb.T)) / ((sqrt(dot(laaa, laaa.T))) * (sqrt(dot(lbbb, lbbb.T))))
     return float(coss)
 
 
@@ -124,7 +123,7 @@ async def index_lst(x, lst):
 
 
 async def selectivity_hide(lst):
-    avg = int(numpy.average([x[1] for x in lst]))
+    avg = int(average([x[1] for x in lst]))
     msg, ind = await index_lst(avg, lst)
     for i in range(ind, min(len(lst), ind + 10)):
         aw = await f_hide_mid(str(lst[i][0]), len(str(lst[i][0])) // 2)
