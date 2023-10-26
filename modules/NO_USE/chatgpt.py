@@ -5,7 +5,7 @@
 from graia.amnesia.message import MessageChain
 from graia.ariadne.app import Ariadne
 from graia.ariadne.event.message import GroupMessage
-from graia.ariadne.message.parser.base import MatchContent
+from graia.ariadne.message.parser.base import MatchContent, DetectPrefix
 from graia.ariadne.model import Group
 from graia.ariadne.util.saya import listen, decorate
 from graia.saya import Channel
@@ -15,6 +15,7 @@ from graia.saya.builtins.broadcast import ListenerSchema
 import openai
 import botfunc
 import json
+import time
 
 channel = Channel.current()
 channel.name("OpenAI")
@@ -46,34 +47,37 @@ async def chatgpt(app: Ariadne, group: Group, event: GroupMessage):
     )
 
 
-# 收到消息，继续聊天
+# 检测发送者消息
 @listen(GroupMessage)
-@decorate(MatchContent(""))
+async def chatgpt(app: Ariadne, group: Group, event: GroupMessage):
+
+
+# 收到消息，继续聊天
+@channel.use(
+    ListenerSchema(
+        listening_events=[GroupMessage],
+        decorators=[DetectPrefix("")]
+    )
+)
 async def autochat(app: Ariadne, group: Group):
     await app.send_message(
         group,
-    chat
+        chat
     )
-
-
-chat = openai.ChatCompletion.create(
-    max_tokens=1000,
-    model="gpt-3.5-turbo",
-    message=[{"role": "user", "content": MessageChat}, "---目前处于Beta环境"],
-)
 
 # ？
 @channel.use(
     ListenerSchema(
         listening_events=[GroupMessage],
-        decorators=[MatchContent("傻逼来聊天")]
+        decorators=[DetectPrefix("!mbti")]
     )
 )
-async def get_bread(app: Ariadne, group: Group, event: GroupMessage):
-    await app.send_group_message(group, "我草你吗", quote=event.source)
-
-# 添加循环，如果听到"YB再见"则跳出
-@listen(GroupMessage)
-@decorate(MatchContent("YB再见"))
-for i in range(len(chat)):
-            break
+async def found_sb(app: Ariadne, group: Group, event: GroupMessage):
+    data = await botfunc.select_fetchone("""SELECT uid, count, ti FROM sblist WHERE uid = %s""", event.sender.id)
+    if data is not None and int(time.time()) - data[2] < 10:
+        await botfunc.run_sql("""UPDATE sblist SET ti = unix_timestamp() WHERE uid = %s""", (event.sender.id,))
+        return
+    await app.send_message(
+        group,
+        "我  草  你  吗"
+    )
