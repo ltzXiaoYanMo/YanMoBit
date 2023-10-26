@@ -6,12 +6,13 @@ build-backend = "pdm.pep517.api"
 
 
 [project]
-name = "KuoHuBit"
+name = "YanBot"
 version = "114514.1919810"
 description = "A QQ Bot"
 authors = [
     { name = "HanTools233", email = "y066ydg5@duck.com" },
     { name = "HanTools233", email = "hantools@foxmail.com" },
+    { name = "ltzXiaoYanMo", email = "xiajiaruimail@qq.com"}
 ]
 dependencies = [
     "graia-ariadne[standard]<1.0.0,>=0.10.2",
