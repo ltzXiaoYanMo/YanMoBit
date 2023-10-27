@@ -1,13 +1,13 @@
-# YanBot_KHB_Edition
+# YanMoBit
 
 [![State-of-the-art Shitcode](https://img.shields.io/static/v1?label=State-of-the-art&message=Shitcode&color=7B5804)](https://github.com/trekhleb/state-of-the-art-shitcode) <-- 本项目是一个纯正的 shitcode
 
 ![image](https://github.com/ltzXiaoYanMo/YanBot_KHB_Edition/assets/72146468/3710d246-e960-4e0d-bf1d-82c87c18ac13)
 
 
-这是YanBot的KHB重构版本，因为上一次的答辩到已经无法正常运行，我只能推翻重来（悲）
+该基于Mirai与Graia，~~还有史~~
 
-同时基于Mirai与Graia（（（
+## 前提提要（？）
 
 此YanBot需要配置cloud.json（运行main.py自动生成）与config.yaml文件即可（色图需在modules中删除，详细请看Older版本）（但如果你要用Older版本确实也能用（草））
 
@@ -18,6 +18,10 @@
 若你是懒狗，可以使用[自动安装](https://github.com/ltzXiaoYanMo/YanBot_KHB_Edition_autorun)
 
 同时感谢[JetBrains](https://jetbrains.com)对于开源社区的支持！
+
+![images-jetbrains](https://tse2-mm.cn.bing.net/th/id/OIP-C.vNe0jPNmX3aROK1UXUYg1wHaIA?pid=ImgDet&rs=1)
+
+![images-pycharm](https://pic4.zhimg.com/50/v2-63cab26d7eaafc9fcfc57fbba9e9d2a9_720w.png?source=54b3c3a5)
 
 在最近的一次更新，已经引入[2kbit-py](https://github.com/Abjust/2kbit-py)的部分代码，虽然已经停止更新，但不代表我们不更新啊（雾）
 
