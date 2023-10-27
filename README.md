@@ -30,8 +30,9 @@
 以下的仓库均帮助过YanBot的成长，我也有可能帮助过<del>（貌似没有）<del>
 
 **⚠️小心：有屎山在此处浑水摸鱼⚠️**
--ltzXiaoYanMo（项目作者）
-  - [YanBot](https://github.com/ltzXiaoYanMo/YanBot)
+
+- ltzXiaoYanMo（项目作者）
+  - ltzXiaoYanMo/YanBot_KHB_Edition（本仓库）
 - Abjust
     - [~~Abjust/2kbit-cs~~](https://github.com/Abjust/2kbit-cs)
         - [~~123Windows31/2kbot~~](https://github.com/123Windows31/2kbot)
@@ -49,6 +50,5 @@
 - [daizihan233](https://github.com/daizihan233/)
     - [daizihan233/KuoHuBit](https://github.com/daizihan233/KuoHuBit)
         - [~~ltzXiaoYanMo/YanBot-KHB_Edition_Older~~](https://github.com/ltzXiaoYanMo/YanBot-KHB_Edition_Older)
-        - ltzXiaoYanMo/YanBot_KHB_Edition（本仓库）
         - [emerald-am9/lightbit](https://gitee.com/emerald-am9/lightbit)
     - [daizihan233/KuoHuShit](https://github.com/daizihan233/KuoHuShit)
