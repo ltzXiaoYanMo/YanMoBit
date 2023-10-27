@@ -32,7 +32,7 @@
 **⚠️小心：有屎山在此处浑水摸鱼⚠️**
 
 - ltzXiaoYanMo（项目作者）
-  - ltzXiaoYanMo/YanBot_KHB_Edition（本仓库）
+  - ltzXiaoYanMo/YanMoBit（本仓库）
 - Abjust
     - [~~Abjust/2kbit-cs~~](https://github.com/Abjust/2kbit-cs)
         - [~~123Windows31/2kbot~~](https://github.com/123Windows31/2kbot)
