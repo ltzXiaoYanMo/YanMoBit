@@ -27,7 +27,7 @@
 
 在2023/8/26日时，项目的Bot遭tx封禁，且在中国地区已经上学，暂且无法更新。
 
-若你是使用Gitee，请在Github处提交Issue和Pull Requests
+若你是使用Gitee，请在[GitHub](https://github.com/ltzXiaoYanMo/YanMoBit)处提交[Issue](https://github.com/ltzXiaoYanMo/YanMoBit/issues)和[Pull Requests](https://github.com/ltzXiaoYanMo/YanMoBit/pulls)
 
 ## 伙伴的仓库
 
