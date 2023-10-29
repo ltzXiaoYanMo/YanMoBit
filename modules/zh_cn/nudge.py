@@ -36,7 +36,7 @@ api_list = [
 @channel.use(ListenerSchema(listening_events=[NudgeEvent]))
 async def nudge(app: Ariadne, event: NudgeEvent):
     # 只检测被戳的是不是机器人
-    if event.target == globalvars.botqq:
+    if event.target == globalvars.bot_qq:
         data = requests.get(random.choice(api_list),
                             headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64))"})
         await app.send_group_message(
