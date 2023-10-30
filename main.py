@@ -56,7 +56,7 @@ cursor.execute("""create table if not exists sblist
         primary key
 ) ENGINE = innodb DEFAULT CHARACTER SET = "utf8mb4" COLLATE = "utf8mb4_general_ci" """)
 
-cursor.execute("""create table if not exists blocklist
+cursor.execute("""create table if not exists blacklist
 (
     uid bigint unsigned not null
         primary key,
