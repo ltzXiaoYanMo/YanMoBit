@@ -2,7 +2,7 @@ name: 已有功能建议
 description: 选这个帮助 YMB 变得更完美
 title: '[Request++]: '
 labels: [ "需求" ]
-assignees: [ "ltzXiaoYanMo" ]
+assignees: [ "ltzXiaoYanMo   " ]
 
 body:
   - type: markdown
