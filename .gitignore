@@ -7,7 +7,13 @@ bin-release/
 # 其他文件和文件夹
 .settings/
 
-# Executables
+# YMB 的 配置文件
+config.yaml
+cloud.json
+jieba_words.txt
+dynamic_config.yaml
+
+# 安装包
 *.swf
 *.air
 *.ipa
@@ -15,8 +21,6 @@ bin-release/
 
 # PDM的个人文件设置
 .pdm-python
+
 # JetBrains的.idea的极霸文件
 .idea/
-# 项目文件，即 `.project`、`.actionScriptProperties` 和 `.flexProperties`
-# 不应被排除，因为它们包含编译器设置和其他重要内容
-# Eclipse/Flash Builder 的信息。
