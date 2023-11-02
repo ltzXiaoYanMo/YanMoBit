@@ -15,7 +15,10 @@
 
 如果确实想使用，请查看[使用手册](https://github.com/ltzXiaoYanMo/YanBot_KHB_Edition/blob/main/starting.md)，或[官方文档](https://bot.ymbot.top)
 
-若你是懒狗，可以使用[自动安装](https://github.com/ltzXiaoYanMo/YanBot_KHB_Edition_autorun)
+若你是懒狗，可以使用自动安装
+
+GitHub:[https://github.com/ltzXiaoYanMo/YanMoBit_autorun](https://github.com/ltzXiaoYanMo/YanMoBit_autorun)<br>
+Gitee:[https://gitee.com/ltzXiaoYanMo/YanMoBit_autorun](https://gitee.com/ltzXiaoYanMo/YanMoBit_autorun)
 
 同时感谢[JetBrains](https://jetbrains.com)对于开源社区的支持！
 
