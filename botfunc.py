@@ -86,7 +86,7 @@ except FileNotFoundError:
   "openai_apikey": ""
 }""")
     logger.error(
-        'cloud.json 未创建，程序已自动创建，请参考 https://github.com/ltzXiaoYanMo/YanBot_KHB_Edition/blob/main/cloud.json.md 填写该文件的内容')
+        'cloud.json 未创建，程序已自动创建，请参考仓库目录下的 cloud.json.md 填写该文件的内容')
     sys.exit(1)
 try:
     dyn_yaml = yaml.safe_load(open('dynamic_config.yaml', 'r', encoding='UTF-8'))
@@ -98,6 +98,13 @@ word:
 img:
 - null""")
     logger.warning('dynamic_config.yaml 已被程序自动创建')
+
+try:
+    jieba_words = open("jieba_words.txt", "r", encoding='utf-8')
+except FileNotFoundError:
+    safe_file_write('jieba_words.txt', """傻逼
+你妈
+""")
 
 
 def get_config(name: str):
@@ -189,6 +196,7 @@ async def get_all_sb() -> list:
     for i in tmp:
         t.append(i[0])
     return t
+
 
 if get_cloud_config("Redis_Pwd") is not None:
     backend = requests_cache.RedisCache(
