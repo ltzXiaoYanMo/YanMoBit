@@ -40,7 +40,7 @@
 - ltzXiaoYanMo（项目作者）
   - ltzXiaoYanMo/YanMoBit（本仓库）
   - [ltzXiaoYanMo/YanBot-infp](https://github.com/ltzXiaoYanMo/YanBot-infp)
-- Abjust
+- [Abjust](https://github.com/Abjust)
     - [~~Abjust/2kbit-cs~~](https://github.com/Abjust/2kbit-cs)
         - [~~123Windows31/2kbot~~](https://github.com/123Windows31/2kbot)
         - [~~Emerald-AM9/Mica-App-Bot-~~](https://github.com/Emerald-AM9/Mica-App-Bot-)
