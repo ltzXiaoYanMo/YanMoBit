@@ -61,6 +61,7 @@ enable_mysql: false  # 是否使用MySQL存储数据
 oneword: https://v1.hitokoto.cn/?c=f&encode=text # 一言api
 zuan_api: https://api.qhsou.com/api/zuan.php # 祖安 API
 zuan_api2: http://api.qemao.com/api/yulu/?type=2 # 祖安 API 2
+CloudFlareStatus
     """)
     logger.error(
         'config.yaml 文件不存在，已生成默认配置文件，请修改后重新运行。'
