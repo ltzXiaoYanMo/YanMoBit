@@ -27,3 +27,7 @@ dynamic_config.yaml
 
 # VSCode文件
 .vscode/
+
+# Pyinstaller
+dist/
+build/
