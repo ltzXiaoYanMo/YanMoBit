@@ -18,6 +18,11 @@ dynamic_config.yaml
 *.air
 *.ipa
 *.apk
+*.exe
+
+# 临时文件
+*.pyz
+*.pyc
 
 # PDM的个人文件设置
 .pdm-python
