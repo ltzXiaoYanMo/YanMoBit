@@ -22,5 +22,8 @@ dynamic_config.yaml
 # PDM的个人文件设置
 .pdm-python
 
-# JetBrains的.idea的极霸文件
+# JetBrains s.r.o.的.idea的极霸文件
 .idea/
+
+# VSCode文件
+.vscode/
