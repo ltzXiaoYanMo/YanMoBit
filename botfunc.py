@@ -84,7 +84,8 @@ except FileNotFoundError:
   "Redis_Pwd": "",
   "snao_key": "",
   "openai_api": "",
-  "openai_apikey": ""
+  "openai_apikey": "",
+  “hfish_apikey”: ""
 }""")
     logger.error(
         'cloud.json 未创建，程序已自动创建，请参考仓库目录下的 cloud.json.md 填写该文件的内容')
