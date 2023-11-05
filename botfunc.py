@@ -85,7 +85,8 @@ except FileNotFoundError:
   "snao_key": "",
   "openai_api": "",
   "openai_apikey": "",
-  “hfish_apikey”: ""
+  "hfish_apikey": "",
+  "Cloudflarestatus_api": "https://www.cloudflarestatus.com/api/v2/status.json"
 }""")
     logger.error(
         'cloud.json 未创建，程序已自动创建，请参考仓库目录下的 cloud.json.md 填写该文件的内容')

@@ -7,12 +7,15 @@ from graia.saya.builtins.broadcast.schema import ListenerSchema
 
 import requests
 import json
+import botfunc
+
 channel = Channel.current()
 channel.name("CloudFlare状态检测")
 channel.description("CloudFlare Status Checker")
 channel.author("ltzXiaoYanMo")
 
-CloudStatus = 'https://www.cloudflarestatus.com/api/v2/status.json'
+CloudStatus = botfunc.get_cloud_config('Cloudflarestatus_api')
+
 
 @channel.use(
     ListenerSchema(
@@ -23,5 +26,5 @@ CloudStatus = 'https://www.cloudflarestatus.com/api/v2/status.json'
 async def status(app: Ariadne, group: Group):
     await app.send_message(
         group,
-        requests.get(json.loads(requests.get(CloudStatus).text)['components'][0]['name']).text
+        f"Cloudflare状态: {requests.get(CloudStatus).json()['status']}"
     )
