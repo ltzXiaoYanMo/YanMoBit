@@ -57,11 +57,10 @@ count_ban: 4  # 木鱼调用频率限制
 text_review: false  # 是否使用腾讯云内容安全 API 对文本内容进行审核：true -> 是 | false -> 否，使用本地敏感词库
 # 请参考此文章就近设置地域：https://cloud.tencent.com/document/api/1124/51864#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8
 Region: ap-hongkong  # 使用香港地区 API
-enable_mysql: false  # 是否使用MySQL存储数据
+enable_mysql: false  # 是否使用MySQL存储数据 true -> 是 | false -> 否
 oneword: https://v1.hitokoto.cn/?c=f&encode=text # 一言api
 zuan_api: https://api.qhsou.com/api/zuan.php # 祖安 API
 zuan_api2: http://api.qemao.com/api/yulu/?type=2 # 祖安 API 2
-CloudFlareStatus
     """)
     logger.error(
         'config.yaml 文件不存在，已生成默认配置文件，请修改后重新运行。'
@@ -223,3 +222,4 @@ else:
     )
 session = requests_cache.CachedSession("global_session", backend=backend, expire_after=360)
 r = redis.Redis(connection_pool=p, decode_responses=True)
+
