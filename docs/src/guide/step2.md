@@ -10,7 +10,7 @@ icon: info
 
 # cloud.json
 
-见 [github.com@daizihan233/KuoHuBit #17](https://github.com/daizihan233/KuoHuBit/issues/17)
+见 [github.com@YanMoBit](https://github.com/ltzXiaoYanMo/YanMoBit/blob/main/cloud.json.md)
 
 # config.yaml
 
@@ -51,3 +51,7 @@ async def text_pretreatment(s):
 # img/6/
 
 里面是与 6榜 相关的图片，你可以自行添加/删除
+
+# img/c/
+
+同上，这里是 c榜 的

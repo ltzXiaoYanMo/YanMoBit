@@ -6,7 +6,6 @@ from graia.saya import Channel
 from graia.saya.builtins.broadcast.schema import ListenerSchema
 
 import requests
-import json
 import botfunc
 
 channel = Channel.current()

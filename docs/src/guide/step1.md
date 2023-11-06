@@ -25,7 +25,7 @@ icon: info
 
 - Git
 - Redis
-- MySQL
+- ~~MySQL~~（现已支持SQLite）
 - MCL（这个工具可以自动帮你安装以下软件，详见后文）
   - Java
   - Mirai
@@ -43,7 +43,7 @@ icon: info
 
 ## 关于 Redis、MySQL 的安装
 
-如果你跟我一样 ~~非常懒~~ 那么你可以选择使用 Docker 安装，Redis请不要设置密码（记得堵好端口）
+如果你跟我一样 ~~非常懒~~ 那么你可以选择使用 Docker 安装，~~Redis请不要设置密码（记得堵好端口）~~ 现在没啥必要了
 
 MySQL 建议使用 8.0.31 （我测试时使用的版本，当然也兼容 5.7 版本，你可以看心情选择）
 
@@ -54,7 +54,7 @@ Redis 建议使用支持 LFU 的版本，即 Redis 4.0 及以后（建议使用�
 ## 关于 Python 的安装
 
 ```text
-Python Version >= 3.10
+Python Version >= 3.9
 ```
 
 安装 pdm：
@@ -72,10 +72,14 @@ pip install pdm
 
 当你遇到一些问题时，你可以简短、抽象地描述问题，比如 `pip 慢`
 
-# 下载 KHB 源码
+# 下载 YMB 源码
 
 ```shell
-git clone https://github.com/daizihan233/KuoHuBit.git
+git clone https://github.com/ltzXiaoYanMo/YanMoBit.git
+```
+国内加速
+```bash
+git clone https://gitee.com/ltzXiaoYanMo/YanMoBit.git
 ```
 
 请务必使用 `git clone` 否则更新起来会很麻烦
@@ -88,4 +92,8 @@ git clone https://github.com/daizihan233/KuoHuBit.git
 pdm install
 ```
 
+## 开发
+```bash
+pip install -r requirements.txt
+```
 就好辣！
