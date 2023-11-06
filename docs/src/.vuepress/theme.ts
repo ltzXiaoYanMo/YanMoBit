@@ -4,11 +4,11 @@ import {zhNavbar} from "./navbar";
 import {zhSidebar} from "./sidebar";
 
 export default hopeTheme({
-    hostname: "https://bot.khbit.cn",
+    hostname: "https://bot.ymbot.top",
 
     author: {
-        name: "KuoHu",
-        url: "https://khbit.cn",
+        name: "YanMo",
+        url: "https://www.ymbot.to",
     },
 
     iconAssets: "iconfont",
