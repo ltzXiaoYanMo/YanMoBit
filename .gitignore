@@ -36,3 +36,6 @@ dynamic_config.yaml
 # Pyinstaller
 dist/
 build/
+
+# 数据库
+database.db
