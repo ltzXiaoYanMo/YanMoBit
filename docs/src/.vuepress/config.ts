@@ -7,8 +7,8 @@ export default defineUserConfig({
     locales: {
         "/": {
             lang: "zh-CN",
-            title: "KuoHuBit",
-            description: "KuoHuBit 的使用、构建、开发文档",
+            title: "YanMoBit",
+            description: "YanMoBit 的使用、构建、开发文档",
         },
     },
 
