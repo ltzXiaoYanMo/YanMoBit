@@ -17,13 +17,13 @@ requests-cache<1.0.0,>=0.9.7
 redis<5.0.0,>=4.4.0
 aiomysql<1.0.0,>=0.1.1
 pymysql<2.0.0,>=1.0.2
-pysqlite3==0.5.2
+#pysqlite3 # 这是标准库，如果IDE报错请把这串注释去除
 ## 分词工具
 jieba<1.0.0,>=0.42.1
 numpy>=1.24.2
 # YMB配置
 pyyaml<7.0,>=6.0
-json
+pyjson
 # 腾讯云安全
 tencentcloud-sdk-python-tms>=3.0.967
 tencentcloud-sdk-python-ims>=3.0.967
@@ -32,5 +32,6 @@ pathlib>=1.0.1
 opencc-python-reimplemented<1.0.0,>=0.1.6
 portalocker>=2.7.0
 rich>=13.4.2
+loguru
 # 打包工具（不过应该没有人专门给一个QQBot打包成exe罢，我就注释掉了，需要自行解除注释）
 # nuitka
