@@ -4,7 +4,6 @@
 #  - 使用 AGPL-3.0 协议
 #  - 注明使用了 Mirai 并其源代码来自此仓库
 import os
-import requests
 from creart import create
 from graia.ariadne.app import Ariadne
 from graia.ariadne.connection.config import (
@@ -13,10 +12,12 @@ from graia.ariadne.connection.config import (
     config,
 )
 from graia.saya import Saya
-from loguru import logger
+from lib_not_dr.logger.logger import Logger
 
 import botfunc
 import databases
+
+logger = Logger.get_logger_by_name("intro")
 
 # 创建数据库
 databases.database_create()

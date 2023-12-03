@@ -32,6 +32,6 @@ pathlib>=1.0.1
 opencc-python-reimplemented<1.0.0,>=0.1.6
 portalocker>=2.7.0
 rich>=13.4.2
-loguru
+lib-not-dr>=0.2.2
 # 打包工具（不过应该没有人专门给一个QQBot打包成exe罢，我就注释掉了，需要自行解除注释）
 # nuitka
