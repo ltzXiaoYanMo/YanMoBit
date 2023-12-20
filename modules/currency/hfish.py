@@ -28,7 +28,6 @@ headers = {
   'Content-Type': 'application/json'
 }
 
-
 @channel.use(
     ListenerSchema(
         listening_events=[GroupMessage],
