@@ -151,5 +151,9 @@ async def run_sql(sql, arg):
     conn.close()
 
 
-def database_create():
-    return None
+def database_create(name: str):
+    conn = aiomysql.connect(host=get_cloud_config('MySQL_Host'),
+                                  port=get_cloud_config('MySQL_Port'),
+                                  user=get_cloud_config('MySQL_User'),
+                                  password=get_cloud_config('MySQL_Pwd'), charset='utf8mb4',
+                                  db=get_cloud_config('MySQL_db'), loop=loop)

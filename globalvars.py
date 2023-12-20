@@ -11,8 +11,8 @@
 
 # 由ltzXiaoYanMo提供更新
 
-bot_qq = 2927468505
-owner_qq = 2315049216
+bot_qq = 114514
+owner_qq = 1919810
 blocklist = []
 g_blocklist = []
 
