@@ -37,13 +37,13 @@ async def card_change(app: Ariadne, event: MemberCardChangeEvent, group: Group):
 # 侦测撤回
 @channel.use(ListenerSchema(listening_events=[GroupRecallEvent]))
 async def recall_detect(app: Ariadne, event: GroupRecallEvent, group: Group):
-    messageChain = (At(event.operator.id), Plain(" 撤回啥了？让我看看！"))
+    message_chain = (At(event.operator.id), Plain(" 撤回啥了？让我看看！"))
     print(event.operator.permission)
     if not event.operator.permission == "ADMINISTRATOR" and not event.operator.permission == "OWNER":
         try:
             await app.send_message(
                 group,
-                MessageChain(messageChain),
+                MessageChain(message_chain),
             )
         except:
             print("群消息发送失败")
