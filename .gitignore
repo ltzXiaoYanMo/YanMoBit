@@ -39,3 +39,5 @@ build/
 
 # 数据库
 database.db
+
+tmp.py
