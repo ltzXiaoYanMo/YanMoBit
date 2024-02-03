@@ -26,10 +26,6 @@ Gitee:[https://gitee.com/ltzXiaoYanMo/YanMoBit_autorun](https://gitee.com/ltzXia
 
 ![images-pycharm](https://pic4.zhimg.com/50/v2-63cab26d7eaafc9fcfc57fbba9e9d2a9_720w.png?source=54b3c3a5)
 
-在最近的一次更新，已经引入[2kbit-py](https://github.com/Abjust/2kbit-py)的部分代码，虽然已经停止更新，但不代表我们不更新啊（雾）
-
-在2023/8/26日时，项目的Bot遭tx封禁，且在中国地区已经上学，暂且无法更新。
-
 若你是使用Gitee，请在[GitHub](https://github.com/ltzXiaoYanMo/YanMoBit)处提交[Issue](https://github.com/ltzXiaoYanMo/YanMoBit/issues)和[Pull Requests](https://github.com/ltzXiaoYanMo/YanMoBit/pulls)
 
 若你实在连不上GitHub，~~那你就不能用镜像站吗老馋~~你可以使用Gitee发送Issue，~~不过我啥时候会看得等114514年~~（PR不看主要还是因为~~会点代码的都能上GitHub罢~~Gitee没有设置Push至GitHub，所以大家尽量还是用GitHub发送罢）
