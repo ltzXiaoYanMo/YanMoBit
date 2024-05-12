@@ -30,6 +30,8 @@ Gitee:[https://gitee.com/ltzXiaoYanMo/YanMoBit_autorun](https://gitee.com/ltzXia
 
 若你实在连不上GitHub，~~那你就不能用镜像站吗老馋~~你可以使用Gitee发送Issue，~~不过我啥时候会看得等114514年~~（PR不看主要还是因为~~会点代码的都能上GitHub罢~~Gitee没有设置Push至GitHub，所以大家尽量还是用GitHub发送罢）
 
+在2024/5/2，本项目已经正式转移至 [KuoHuBit](https://github.com/daizihan233/KuoHuBit)，本仓库转至 Public Archive
+ 
 ## 伙伴的仓库
 
 以下的仓库均帮助过YanBot的成长，我也有可能帮助过<del>（貌似没有）<del>
@@ -58,3 +60,4 @@ Gitee:[https://gitee.com/ltzXiaoYanMo/YanMoBit_autorun](https://gitee.com/ltzXia
         - [~~ltzXiaoYanMo/YanBot-KHB_Edition_Older~~](https://github.com/ltzXiaoYanMo/YanBot-KHB_Edition_Older)
         - [emerald-am9/lightbit](https://gitee.com/emerald-am9/lightbit)
     - [daizihan233/KuoHuShit](https://github.com/daizihan233/KuoHuShit)
+
